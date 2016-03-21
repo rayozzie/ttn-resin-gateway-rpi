@@ -23,20 +23,31 @@ if [[ $GATEWAY_NAME == "" ]]; then
 fi
 echo GATEWAY_NAME: $GATEWAY_NAME
 
-printf "       Contact email: "
-read GATEWAY_EMAIL
+if [[ $GATEWAY_EMAIL == "" ]]; then
+    echo "ERROR: NO GATEWAY_EMAIL FOUND IN ENVIRONMENT"
+    exit 1
+fi
+echo GATEWAY_EMAIL: $GATEWAY_EMAIL
 
-printf "       Latitude [0]: "
-read GATEWAY_LAT
-if [[ $GATEWAY_LAT == "" ]]; then GATEWAY_LAT=0; fi
+if [[ $GATEWAY_LAT == "" ]]; then
+    echo "ERROR: NO GATEWAY_LAT (latitude) FOUND IN ENVIRONMENT"
+    exit 1
+fi
+echo GATEWAY_LAT: $GATEWAY_LAT
 
-printf "       Longitude [0]: "
-read GATEWAY_LON
-if [[ $GATEWAY_LON == "" ]]; then GATEWAY_LON=0; fi
+if [[ $GATEWAY_LON == "" ]]; then
+    echo "ERROR: NO GATEWAY_LON (longitude) FOUND IN ENVIRONMENT"
+    exit 1
+fi
+echo GATEWAY_LON: $GATEWAY_LON
 
-printf "       Altitude [0]: "
-read GATEWAY_ALT
-if [[ $GATEWAY_ALT == "" ]]; then GATEWAY_ALT=0; fi
+if [[ $GATEWAY_ALT == "" ]]; then
+    echo "ERROR: NO GATEWAY_ALT (altitude) FOUND IN ENVIRONMENT"
+    exit 1
+fi
+echo GATEWAY_ALT: $GATEWAY_ALT
+
+echo ""
 
 # Check dependencies
 echo "Installing dependencies..."

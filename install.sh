@@ -15,6 +15,8 @@ echo "The Things Network Gateway installer"
 echo ""
 
 # Retrieve gateway configuration for later
+env
+
 echo "Configuring gateway:"
 
 if [[ $GATEWAY_NAME == "" ]]; then
