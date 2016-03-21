@@ -1,17 +1,17 @@
 FROM resin/raspberrypi-golang
 
-# What's the name of your go package?
-ENV PKG test
-
 # Enable systemd
 ENV INITSYSTEM on
 
 # Copy all the source code to the place where golang will find it
-COPY ./src $GOPATH/src
+COPY . ~/ttn-gateway
 
-# Build all the golang source
-WORKDIR $GOPATH/src/$PKG
-RUN go get && go install && go build all
+# Build the gateway
+WORKDIR ~/ttn-gateway
+RUN ./install.sh
 
-# Tell the container to run the golang program's binary on startup
-CMD ["sh", "-c", "env && $GOPATH/bin/$PKG"]
+# Make sure we start up within the bin directory
+WORKDIR ~/opt/ttn-gateway/bin
+
+# Start it up
+CMD ["sh", "-c", "env && ./start.sh"]

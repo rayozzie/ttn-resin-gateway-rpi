@@ -1,4 +1,4 @@
-FROM resin/raspberrypi
+FROM resin/raspberrypi-buildpack-deps
 
 # Enable systemd
 ENV INITSYSTEM on
