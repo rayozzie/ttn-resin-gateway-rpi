@@ -11,7 +11,7 @@ WORKDIR ~/ttn-gateway
 RUN ./install.sh
 
 # Make sure we start up within the bin directory
-WORKDIR ~/opt/ttn-gateway/bin
+WORKDIR /opt/ttn-gateway/bin
 
 # Start it up
-CMD ["sh", "-c", "env && ./start.sh"]
+CMD ["sh", "-c", "pwd && ls /opt/ttn-gateway/bin && env && ./start.sh"]
