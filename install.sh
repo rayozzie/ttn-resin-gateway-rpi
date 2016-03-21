@@ -14,43 +14,6 @@ if [[ $1 != "" ]]; then VERSION=$1; fi
 echo "The Things Network Gateway installer"
 echo ""
 
-# Retrieve gateway configuration for later
-env
-
-echo "Configuring gateway:"
-
-if [[ $GATEWAY_NAME == "" ]]; then
-    echo "ERROR: NO GATEWAY_NAME FOUND IN ENVIRONMENT"
-    exit 1
-fi
-echo GATEWAY_NAME: $GATEWAY_NAME
-
-if [[ $GATEWAY_EMAIL == "" ]]; then
-    echo "ERROR: NO GATEWAY_EMAIL FOUND IN ENVIRONMENT"
-    exit 1
-fi
-echo GATEWAY_EMAIL: $GATEWAY_EMAIL
-
-if [[ $GATEWAY_LAT == "" ]]; then
-    echo "ERROR: NO GATEWAY_LAT (latitude) FOUND IN ENVIRONMENT"
-    exit 1
-fi
-echo GATEWAY_LAT: $GATEWAY_LAT
-
-if [[ $GATEWAY_LON == "" ]]; then
-    echo "ERROR: NO GATEWAY_LON (longitude) FOUND IN ENVIRONMENT"
-    exit 1
-fi
-echo GATEWAY_LON: $GATEWAY_LON
-
-if [[ $GATEWAY_ALT == "" ]]; then
-    echo "ERROR: NO GATEWAY_ALT (altitude) FOUND IN ENVIRONMENT"
-    exit 1
-fi
-echo GATEWAY_ALT: $GATEWAY_ALT
-
-echo ""
-
 # Check dependencies
 echo "Installing dependencies..."
 apt-get update
@@ -117,8 +80,6 @@ if [ ! -d bin ]; then mkdir bin; fi
 if [ -f ./bin/poly_pkt_fwd ]; then rm ./bin/poly_pkt_fwd; fi
 ln -s $INSTALL_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd ./bin/poly_pkt_fwd
 cp -f ./packet_forwarder/poly_pkt_fwd/global_conf.json ./bin/global_conf.json
-
-echo -e "{\n\t\"gateway_conf\": {\n\t\t\"gateway_ID\": \"0000000000000000\",\n\t\t\"servers\": [ { \"server_address\": \"croft.thethings.girovito.nl\", \"serv_port_up\": 1700, \"serv_port_down\": 1701, \"serv_enabled\": true } ],\n\t\t\"ref_latitude\": $GATEWAY_LAT,\n\t\t\"ref_longitude\": $GATEWAY_LON,\n\t\t\"ref_altitude\": $GATEWAY_ALT,\n\t\t\"contact_email\": \"$GATEWAY_EMAIL\",\n\t\t\"description\": \"$GATEWAY_NAME\" \n\t}\n}" >./bin/local_conf.json
 
 popd
 
