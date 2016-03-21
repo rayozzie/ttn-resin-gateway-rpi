@@ -15,14 +15,14 @@ echo "The Things Network Gateway installer"
 echo "Version $VERSION"
 
 # Retrieve gateway configuration for later
-echo "Configure your gateway:"
-printf "       Descriptive name [ttn-ic880a]:"
-read GATEWAY_NAME
+echo "Configuring gateway:"
+
 if [ $GATEWAY_NAME == "" ];
 then
-    echo "ERROR: NO GATEWAY SPECIFIED"
+    echo "ERROR: NO GATEWAY_NAME FOUND IN ENVIRONMENT"
     exit 1
 fi
+echo GATEWAY_NAME: $GATEWAY_NAME
 
 printf "       Contact email: "
 read GATEWAY_EMAIL

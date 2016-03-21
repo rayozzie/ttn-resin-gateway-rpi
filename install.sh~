@@ -18,7 +18,11 @@ echo "Version $VERSION"
 echo "Configure your gateway:"
 printf "       Descriptive name [ttn-ic880a]:"
 read GATEWAY_NAME
-if [[ $GATEWAY_NAME == "" ]]; then GATEWAY_NAME="ttn-ic880a"; fi
+if [ $GATEWAY_NAME == "" ];
+then
+    echo "ERROR: NO GATEWAY SPECIFIED"
+    exit 1
+fi
 
 printf "       Contact email: "
 read GATEWAY_EMAIL
