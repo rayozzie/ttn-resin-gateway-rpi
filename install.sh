@@ -12,13 +12,12 @@ VERSION="master"
 if [[ $1 != "" ]]; then VERSION=$1; fi
 
 echo "The Things Network Gateway installer"
-echo "Version $VERSION"
+echo ""
 
 # Retrieve gateway configuration for later
 echo "Configuring gateway:"
 
-if [ $GATEWAY_NAME == "" ];
-then
+if [[ $GATEWAY_NAME == "" ]]; then
     echo "ERROR: NO GATEWAY_NAME FOUND IN ENVIRONMENT"
     exit 1
 fi
