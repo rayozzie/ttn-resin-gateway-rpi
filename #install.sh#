@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Ensure that this is a repo
+
 # Stop on the first sign of trouble
 set -e
 
