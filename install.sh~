@@ -81,6 +81,12 @@ if [ -f ./bin/poly_pkt_fwd ]; then rm ./bin/poly_pkt_fwd; fi
 ln -s $INSTALL_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd ./bin/poly_pkt_fwd
 cp -f ./packet_forwarder/poly_pkt_fwd/global_conf.json ./bin/global_conf.json
 
+# Startup shell script
+
+cp ./start.sh ./bin/start.sh
+
+# Restore location
+
 popd
 
 echo "Installation completed."
