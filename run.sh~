@@ -2,9 +2,9 @@
 
 # Configure the global and local configuration files via the environment
 
-echo "*******************"
+echo "******************"
 echo "*** Configuration:"
-echo "*******************"
+echo "******************"
 
 if [[ $GW_REGION == "" ]]; then
     echo "ERROR: GW_REGION required"
