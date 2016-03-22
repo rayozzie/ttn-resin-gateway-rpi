@@ -14,4 +14,4 @@ RUN ./install.sh
 WORKDIR /opt/ttn-gateway/bin
 
 # Start it up
-CMD ["sh", "-c", "env && echo && ./start.sh"]
+CMD ["sh", "-c", "./start.sh"]
