@@ -1,74 +1,92 @@
 #! /bin/bash
 
-# Display the environment, which is useful when debugging
+# Stop on the first sign of trouble
+set -e
 
-echo "******************"
-echo "*** Environment:"
-env
-echo "******************"
+if [ $UID != 0 ]; then
+    echo "ERROR: Operation not permitted. Forgot sudo?"
+    exit 1
+fi
+
+VERSION="master"
+if [[ $1 != "" ]]; then VERSION=$1; fi
+
+echo "The Things Network Gateway installer"
 echo ""
 
-# Configure the global and local configuration files via the environment
+# Check dependencies
+echo "Installing dependencies..."
+apt-get update
+apt-get install swig libftdi-dev python-dev
 
-echo "******************"
-echo "*** Configuration:"
-echo "******************"
+# Install LoRaWAN packet forwarder repositories
+INSTALL_DIR="/opt/ttn-gateway"
+if [ ! -d "$INSTALL_DIR" ]; then mkdir $INSTALL_DIR; fi
+pushd $INSTALL_DIR
 
-if [[ $GATEWAY_NAME == "" ]]; then
-    echo "ERROR: NO GATEWAY_NAME FOUND IN ENVIRONMENT"
-    exit 1
+# Build libraries
+if [ ! -d libmpsse ]; then
+    git clone https://github.com/devttys0/libmpsse.git
+    pushd libmpsse/src
+else
+    pushd libmpsse/src
+    git reset --hard
+    git pull
 fi
-echo GATEWAY_NAME: $GATEWAY_NAME
 
-if [[ $GATEWAY_EMAIL == "" ]]; then
-    echo "ERROR: NO GATEWAY_EMAIL FOUND IN ENVIRONMENT"
-    exit 1
+./configure --disable-python
+make
+make install
+ldconfig
+
+popd
+
+# Build LoRa gateway app
+if [ ! -d lora_gateway ]; then
+    git clone https://github.com/TheThingsNetwork/lora_gateway.git
+    pushd lora_gateway
+else
+    pushd lora_gateway
+    git reset --hard
+    git pull
 fi
-echo GATEWAY_EMAIL: $GATEWAY_EMAIL
 
-if [[ $GATEWAY_LAT == "" ]]; then
-    echo "ERROR: NO GATEWAY_LAT (latitude) FOUND IN ENVIRONMENT"
-    exit 1
+cp ./libloragw/99-libftdi.rules /etc/udev/rules.d/99-libftdi.rules
+
+sed -i -e 's/CFG_SPI= native/CFG_SPI= ftdi/g' ./libloragw/library.cfg
+sed -i -e 's/PLATFORM= kerlink/PLATFORM= lorank/g' ./libloragw/library.cfg
+sed -i -e 's/ATTRS{idProduct}=="6010"/ATTRS{idProduct}=="6014"/g' /etc/udev/rules.d/99-libftdi.rules
+
+make
+
+popd
+
+# Build packet forwarder
+if [ ! -d packet_forwarder ]; then
+    git clone https://github.com/TheThingsNetwork/packet_forwarder.git
+    pushd packet_forwarder
+else
+    pushd packet_forwarder
+    git pull
+    git reset --hard
 fi
-echo GATEWAY_LAT: $GATEWAY_LAT
 
-if [[ $GATEWAY_LON == "" ]]; then
-    echo "ERROR: NO GATEWAY_LON (longitude) FOUND IN ENVIRONMENT"
-    exit 1
-fi
-echo GATEWAY_LON: $GATEWAY_LON
+make
 
-if [[ $GATEWAY_ALT == "" ]]; then
-    echo "ERROR: NO GATEWAY_ALT (altitude) FOUND IN ENVIRONMENT"
-    exit 1
-fi
-echo GATEWAY_ALT: $GATEWAY_ALT
+popd
 
-echo "******************"
-echo ""
+# Symlink poly packet forwarder
+if [ ! -d bin ]; then mkdir bin; fi
+if [ -f ./bin/poly_pkt_fwd ]; then rm ./bin/poly_pkt_fwd; fi
+ln -s $INSTALL_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd ./bin/poly_pkt_fwd
+cp -f ./packet_forwarder/poly_pkt_fwd/global_conf.json ./bin/global_conf.json
 
-echo -e "{\n\t\"gateway_conf\": {\n\t\t\"gateway_ID\": \"0000000000000000\",\n\t\t\"servers\": [ { \"server_address\": \"croft.thethings.girovito.nl\", \"serv_port_up\": 1700, \"serv_port_down\": 1701, \"serv_enabled\": true } ],\n\t\t\"ref_latitude\": $GATEWAY_LAT,\n\t\t\"ref_longitude\": $GATEWAY_LON,\n\t\t\"ref_altitude\": $GATEWAY_ALT,\n\t\t\"contact_email\": \"$GATEWAY_EMAIL\",\n\t\t\"description\": \"$GATEWAY_NAME\" \n\t}\n}" >./local_conf.json
+# Restore location back to where we started the install
 
-# Reset gateway ID based on MAC
+popd
 
-echo "******************"
-../packet_forwarder/reset_pkt_fwd.sh start ./local_conf.json
-echo "******************"
-echo ""
+# Copy startup shell script to the install directory
 
-# Test the connection, wait if needed.
-while [[ $(ping -c1 google.com 2>&1 | grep " 0% packet loss") == "" ]]; do
-  echo "[TTN Gateway]: Waiting for internet connection..."
-  sleep 30
-  done
+cp ./resin-run.sh $INSTALL_DIR/bin/resin-run.sh
 
-# Fire up the forwarder.  
-while true
-  do
-    echo "[TTN Gateway]: Starting packet forwarder..."
-    ./poly_pkt_fwd
-	echo "******************"
-    echo "*** [TTN Gateway]: EXIT (retrying in 15s)"
-	echo "******************"
-    sleep 15
-  done
+echo "Installation completed."

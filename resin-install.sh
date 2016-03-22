@@ -79,7 +79,9 @@ popd
 if [ ! -d bin ]; then mkdir bin; fi
 if [ -f ./bin/poly_pkt_fwd ]; then rm ./bin/poly_pkt_fwd; fi
 ln -s $INSTALL_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd ./bin/poly_pkt_fwd
-cp -f ./packet_forwarder/poly_pkt_fwd/global_conf.json ./bin/global_conf.json
+
+# copy initial global configuration file
+# cp -f ./packet_forwarder/poly_pkt_fwd/global_conf.json ./bin/global_conf.json
 
 # Restore location back to where we started the install
 
