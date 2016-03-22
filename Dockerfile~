@@ -4,13 +4,13 @@ FROM resin/raspberrypi-buildpack-deps
 ENV INITSYSTEM on
 
 # Build the gateway
-WORKDIR ~/ttn-gateway
-COPY resin-install.sh .
+COPY resin-install.sh /ttn-gateway
+WORKDIR /ttn-gateway
 RUN ./resin-install.sh
 
 # Make sure we start up within the bin directory
+COPY resin-run.sh /opt/ttn-gateway/bin
 WORKDIR /opt/ttn-gateway/bin
-COPY resin-run.sh .
 
 # Start it up
 CMD ["sh", "-c", "./resin-run.sh"]
