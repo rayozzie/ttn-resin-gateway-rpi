@@ -7,37 +7,37 @@ echo "*** Configuration:"
 echo "******************"
 
 if [[ $GW_REGION == "" ]]; then
-    echo "ERROR: GW_REGION required
+    echo "ERROR: GW_REGION required"
     while true; do sleep 10; done
 fi
 echo GW_REGION: $GW_REGION
 
 if [[ $GW_DESCRIPTION == "" ]]; then
-    echo "ERROR: GW_DESCRIPTION required
+    echo "ERROR: GW_DESCRIPTION required"
     while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_CONTACT_EMAIL == "" ]]; then
-    echo "ERROR: GW_CONTACT_EMAIL required
+    echo "ERROR: GW_CONTACT_EMAIL required"
     while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_LATITUDE == "" ]]; then
-    echo "ERROR: GW_REF_LATITUDE required
+    echo "ERROR: GW_REF_LATITUDE required"
     while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_LONGITUDE == "" ]]; then
-    echo "ERROR: GW_REF_LONGITUDE required
+    echo "ERROR: GW_REF_LONGITUDE required"
     while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_ALTITUDE == "" ]]; then
-    echo "ERROR: GW_REF_ALTITUDE required
+    echo "ERROR: GW_REF_ALTITUDE required"
     while true; do sleep 10; done # don't exit in resin
     exit 1
 fi
