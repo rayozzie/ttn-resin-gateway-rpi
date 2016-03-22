@@ -60,14 +60,12 @@ echo ""
 
 # load the region-appropriate global conf
 
-echo eval curl "https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GATEWAY_REGION-global-conf.json --output ./global-conf.json
-
-eval curl "https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GATEWAY_REGION-global-conf.json --output ./global-conf.json
-err=$?
-if [ $err -ne 0 ]
+if curl --fail "https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GATEWAY_REGION-global-conf.json --output ./global-conf.json
 then
+	sleep 1
+else
 	echo "******************"
-    echo "ERROR: GATEWAY_REGION not found: $err"
+    echo "ERROR: GATEWAY_REGION not found"
 	echo "******************"
     while true; do sleep 10; done # don't exit in resin
     exit 1
