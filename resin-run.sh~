@@ -7,37 +7,37 @@ echo "*** Configuration:"
 echo "******************"
 
 if [[ $GW_REGION == "" ]]; then
-    echo "ERROR: GW_REGION required
+    echo "ERROR: GW_REGION required"
     while true; do sleep 10; done
 fi
 echo GW_REGION: $GW_REGION
 
 if [[ $GW_DESCRIPTION == "" ]]; then
-    echo "ERROR: GW_DESCRIPTION required
+    echo "ERROR: GW_DESCRIPTION required"
     while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_CONTACT_EMAIL == "" ]]; then
-    echo "ERROR: GW_CONTACT_EMAIL required
+    echo "ERROR: GW_CONTACT_EMAIL required"
     while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_LATITUDE == "" ]]; then
-    echo "ERROR: GW_REF_LATITUDE required
+    echo "ERROR: GW_REF_LATITUDE required"
     while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_LONGITUDE == "" ]]; then
-    echo "ERROR: GW_REF_LONGITUDE required
+    echo "ERROR: GW_REF_LONGITUDE required"
     while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_ALTITUDE == "" ]]; then
-    echo "ERROR: GW_REF_ALTITUDE required
+    echo "ERROR: GW_REF_ALTITUDE required"
     while true; do sleep 10; done # don't exit in resin
     exit 1
 fi
@@ -111,35 +111,35 @@ echo -e "{\n\
 \t\t\"ref_altitude\": $GW_REF_ALTITUDE,\n\
 \t\t\"contact_email\": \"$GW_CONTACT_EMAIL\",\n\
 \t\t\"description\": \"$GW_DESCRIPTION\" \n\
-\t\t"gps": $GW_GPS,\n\
-\t\t"beacon": $GW_BEACON,\n\
-\t\t"monitor": $GW_MONITOR,\n\
-\t\t"upstream": $GW_UPSTREAM,\n\
-\t\t"downstream": $GW_DOWNSTREAM,\n\
-\t\t"ghoststream": $GW_GHOSTSTREAM,\n\
-\t\t"radiostream": $GW_RADIOSTREAM,\n\
-\t\t"statusstream": $GW_STATUSSTREAM,\n\
-\t\t"server_address": $GW_SERVER_ADDRESS,\n\
-\t\t"serv_port_up": $GW_SERV_PORT_UP,\n\
-\t\t"serv_port_down": $GW_SERV_PORT_DOWN,\n\
-\t\t"keepalive_interval": $GW_KEEPALIVE_INTERVAL,\n\
-\t\t"stat_interval": $GW_STAT_INTERVAL,\n\
-\t\t"push_timeout_ms": $GW_PUSH_TIMEOUT_MS,\n\
-\t\t"forward_crc_valid": $GW_FORWARD_CRC_VALID,\n\
-\t\t"forward_crc_error": $GW_FORWARD_CRC_ERROR,\n\
-\t\t"forward_crc_disabled": $GW_FORWARD_CRC_DISABLED,\n\
-\t\t"gps_tty_path": $GW_GPS_TTY_PATH,\n\
-\t\t"fake_gps": $GW_FAKE_GPS,\n\
-\t\t"ghost_address": $GW_GHOST_ADDRESS,\n\
-\t\t"ghost_port": $GW_GHOST_PORT,\n\
-\t\t"monitor_address": $GW_MONITOR_ADDRESS,\n\
-\t\t"monitor_port": $GW_MONITOR_PORT,\n\
-\t\t"ssh_path": $GW_SSH_PATH,\n\
-\t\t"ssh_port": $GW_SSH_PORT,\n\
-\t\t"http_port": $GW_HTTP_PORT,\n\
-\t\t"ngrok_path": $GW_NGROK_PATH,\n\
-\t\t"system_calls": $GW_SYSTEM_CALLS,\n\
-\t\t"platform": $GW_PLATFORM,\n\
+\t\t\"gps\": $GW_GPS,\n\
+\t\t\"beacon\": $GW_BEACON,\n\
+\t\t\"monitor\": $GW_MONITOR,\n\
+\t\t\"upstream\": $GW_UPSTREAM,\n\
+\t\t\"downstream\": $GW_DOWNSTREAM,\n\
+\t\t\"ghoststream\": $GW_GHOSTSTREAM,\n\
+\t\t\"radiostream\": $GW_RADIOSTREAM,\n\
+\t\t\"statusstream\": $GW_STATUSSTREAM,\n\
+\t\t\"server_address\": $GW_SERVER_ADDRESS,\n\
+\t\t\"serv_port_up\": $GW_SERV_PORT_UP,\n\
+\t\t\"serv_port_down\": $GW_SERV_PORT_DOWN,\n\
+\t\t\"keepalive_interval\": $GW_KEEPALIVE_INTERVAL,\n\
+\t\t\"stat_interval\": $GW_STAT_INTERVAL,\n\
+\t\t\"push_timeout_ms\": $GW_PUSH_TIMEOUT_MS,\n\
+\t\t\"forward_crc_valid\": $GW_FORWARD_CRC_VALID,\n\
+\t\t\"forward_crc_error\": $GW_FORWARD_CRC_ERROR,\n\
+\t\t\"forward_crc_disabled\": $GW_FORWARD_CRC_DISABLED,\n\
+\t\t\"gps_tty_path\": $GW_GPS_TTY_PATH,\n\
+\t\t\"fake_gps\": $GW_FAKE_GPS,\n\
+\t\t\"ghost_address\": $GW_GHOST_ADDRESS,\n\
+\t\t\"ghost_port\": $GW_GHOST_PORT,\n\
+\t\t\"monitor_address\": $GW_MONITOR_ADDRESS,\n\
+\t\t\"monitor_port\": $GW_MONITOR_PORT,\n\
+\t\t\"ssh_path\": $GW_SSH_PATH,\n\
+\t\t\"ssh_port\": $GW_SSH_PORT,\n\
+\t\t\"http_port\": $GW_HTTP_PORT,\n\
+\t\t\"ngrok_path\": $GW_NGROK_PATH,\n\
+\t\t\"system_calls\": $GW_SYSTEM_CALLS,\n\
+\t\t\"platform\": $GW_PLATFORM,\n\
 \t}\n\
 }" >./local_conf.json
 
