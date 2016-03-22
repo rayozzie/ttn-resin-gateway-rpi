@@ -62,7 +62,7 @@ fi
 
 if curl -sS --fail ipinfo.io --output ./ipinfo.json
 then
-	echo "Gateway Location:"
+	echo "Actual gateway location:"
 	IPINFO=$(cat ./ipinfo.json)
 	echo $IPINFO
 else
@@ -80,10 +80,6 @@ if [[ $GW_DOWNSTREAM == "" ]]; then GW_DOWNSTREAM="true"; fi
 if [[ $GW_GHOSTSTREAM == "" ]]; then GW_GHOSTSTREAM="false"; fi
 if [[ $GW_RADIOSTREAM == "" ]]; then GW_RADIOSTREAM="true"; fi
 if [[ $GW_STATUSSTREAM == "" ]]; then GW_STATUSSTREAM="true"; fi
-
-if [[ $GW_SERVER_ADDRESS == "" ]]; then GW_SERVER_ADDRESS="\"127.0.0.1\""; fi
-if [[ $GW_SERV_PORT_UP == "" ]]; then GW_SERV_PORT_UP="1600"; fi
-if [[ $GW_SERV_PORT_DOWN == "" ]]; then GW_SERV_PORT_DOWN="1601"; fi
 
 if [[ $GW_KEEPALIVE_INTERVAL == "" ]]; then GW_KEEPALIVE_INTERVAL="10"; fi
 if [[ $GW_STAT_INTERVAL == "" ]]; then GW_STAT_INTERVAL="30"; fi
@@ -114,9 +110,6 @@ if [[ $GW_SYSTEM_CALLS == "" ]]; then GW_SYSTEM_CALLS="[\"df -m\",\"free -h\",\"
 if [[ $GW_PLATFORM == "" ]]; then GW_PLATFORM="\"*\""; fi
 
 # create local.conf
-# \t\t\"server_address\": $GW_SERVER_ADDRESS,\n\
-# \t\t\"serv_port_up\": $GW_SERV_PORT_UP,\n\
-# \t\t\"serv_port_down\": $GW_SERV_PORT_DOWN,\n\
 
 echo -e "{\n\
 \t\"gateway_conf\": {\n\

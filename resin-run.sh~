@@ -114,6 +114,9 @@ if [[ $GW_SYSTEM_CALLS == "" ]]; then GW_SYSTEM_CALLS="[\"df -m\",\"free -h\",\"
 if [[ $GW_PLATFORM == "" ]]; then GW_PLATFORM="\"*\""; fi
 
 # create local.conf
+# \t\t\"server_address\": $GW_SERVER_ADDRESS,\n\
+# \t\t\"serv_port_up\": $GW_SERV_PORT_UP,\n\
+# \t\t\"serv_port_down\": $GW_SERV_PORT_DOWN,\n\
 
 echo -e "{\n\
 \t\"gateway_conf\": {\n\
@@ -130,9 +133,6 @@ echo -e "{\n\
 \t\t\"ghoststream\": $GW_GHOSTSTREAM,\n\
 \t\t\"radiostream\": $GW_RADIOSTREAM,\n\
 \t\t\"statusstream\": $GW_STATUSSTREAM,\n\
-# \t\t\"server_address\": $GW_SERVER_ADDRESS,\n\
-# \t\t\"serv_port_up\": $GW_SERV_PORT_UP,\n\
-# \t\t\"serv_port_down\": $GW_SERV_PORT_DOWN,\n\
 \t\t\"keepalive_interval\": $GW_KEEPALIVE_INTERVAL,\n\
 \t\t\"stat_interval\": $GW_STAT_INTERVAL,\n\
 \t\t\"push_timeout_ms\": $GW_PUSH_TIMEOUT_MS,\n\
