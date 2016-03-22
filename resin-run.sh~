@@ -1,4 +1,4 @@
-`#! /bin/bash
+#! /bin/bash
 
 # Configure the global and local configuration files via the environment
 
