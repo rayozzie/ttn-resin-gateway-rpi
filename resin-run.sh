@@ -16,36 +16,41 @@ echo "******************"
 
 if [[ $GATEWAY_REGION == "" ]]; then
     echo "ERROR: NO GATEWAY_REGION FOUND IN ENVIRONMENT"
-    exit 1
+    while true; do sleep 10; done
 fi
 echo GATEWAY_REGION: $GATEWAY_REGION
 
 if [[ $GATEWAY_NAME == "" ]]; then
     echo "ERROR: NO GATEWAY_NAME FOUND IN ENVIRONMENT"
-    exit 1
+    while true; do sleep 10; done # don't exit in resin
+	exit 1
 fi
 echo GATEWAY_NAME: $GATEWAY_NAME
 
 if [[ $GATEWAY_EMAIL == "" ]]; then
     echo "ERROR: NO GATEWAY_EMAIL FOUND IN ENVIRONMENT"
-    exit 1
+    while true; do sleep 10; done # don't exit in resin
+	exit 1
 fi
 echo GATEWAY_EMAIL: $GATEWAY_EMAIL
 
 if [[ $GATEWAY_LAT == "" ]]; then
     echo "ERROR: NO GATEWAY_LAT (latitude) FOUND IN ENVIRONMENT"
-    exit 1
+    while true; do sleep 10; done # don't exit in resin
+	exit 1
 fi
 echo GATEWAY_LAT: $GATEWAY_LAT
 
 if [[ $GATEWAY_LON == "" ]]; then
     echo "ERROR: NO GATEWAY_LON (longitude) FOUND IN ENVIRONMENT"
-    exit 1
+    while true; do sleep 10; done # don't exit in resin
+	exit 1
 fi
 echo GATEWAY_LON: $GATEWAY_LON
 
 if [[ $GATEWAY_ALT == "" ]]; then
     echo "ERROR: NO GATEWAY_ALT (altitude) FOUND IN ENVIRONMENT"
+    while true; do sleep 10; done # don't exit in resin
     exit 1
 fi
 echo GATEWAY_ALT: $GATEWAY_ALT
@@ -55,15 +60,14 @@ echo ""
 
 # load the region-appropriate global conf
 
-echo eval curl "https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GATEWAY_REGION-global-conf.json --output ./global-conf.json
-
-eval curl "https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GATEWAY_REGION-global-conf.json --output ./global-conf.json
-err=$?
-if [ $err -ne 0 ]
+if curl --fail "https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GATEWAY_REGION-global-conf.json --output ./global-conf.json
 then
+	sleep 1
+else
 	echo "******************"
-    echo "ERROR: GATEWAY_REGION not found: $err"
+    echo "ERROR: GATEWAY_REGION not found"
 	echo "******************"
+    while true; do sleep 10; done # don't exit in resin
     exit 1
 fi
 
