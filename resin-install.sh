@@ -84,8 +84,4 @@ ln -s $INSTALL_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd ./bin/poly_pkt_fwd
 
 popd
 
-# Copy startup shell script to the install directory
-
-cp ./resin-run.sh $INSTALL_DIR/bin/resin-run.sh
-
 echo "Installation completed."
