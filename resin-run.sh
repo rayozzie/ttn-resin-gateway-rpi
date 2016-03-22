@@ -58,6 +58,18 @@ else
     exit 1
 fi
 
+# fetch location info, which we'll use as a hint to the gateway software
+
+if curl -sS --fail ipinfo.io --output ./ipinfo.json
+then
+	echo "Gateway Location:"
+	IPINFO=$(cat ./ipinfo.json)
+	echo $IPINFO
+else
+	echo "Unable to determine gateway location"
+	IPINFO="\"\""
+fi
+
 # set up environmental defaults for local.conf
 
 if [[ $GW_GPS == "" ]]; then GW_GPS="true"; fi
@@ -118,9 +130,9 @@ echo -e "{\n\
 \t\t\"ghoststream\": $GW_GHOSTSTREAM,\n\
 \t\t\"radiostream\": $GW_RADIOSTREAM,\n\
 \t\t\"statusstream\": $GW_STATUSSTREAM,\n\
-\t\t\"server_address\": $GW_SERVER_ADDRESS,\n\
-\t\t\"serv_port_up\": $GW_SERV_PORT_UP,\n\
-\t\t\"serv_port_down\": $GW_SERV_PORT_DOWN,\n\
+# \t\t\"server_address\": $GW_SERVER_ADDRESS,\n\
+# \t\t\"serv_port_up\": $GW_SERV_PORT_UP,\n\
+# \t\t\"serv_port_down\": $GW_SERV_PORT_DOWN,\n\
 \t\t\"keepalive_interval\": $GW_KEEPALIVE_INTERVAL,\n\
 \t\t\"stat_interval\": $GW_STAT_INTERVAL,\n\
 \t\t\"push_timeout_ms\": $GW_PUSH_TIMEOUT_MS,\n\
@@ -139,6 +151,7 @@ echo -e "{\n\
 \t\t\"ngrok_path\": $GW_NGROK_PATH,\n\
 \t\t\"system_calls\": $GW_SYSTEM_CALLS,\n\
 \t\t\"platform\": $GW_PLATFORM,\n\
+\t\t\"ipinfo\": $IPINFO,\n\
 \t\t\"gateway_ID\": \"0000000000000000\"\n\
 \t}\n\
 }" >./local_conf.json
