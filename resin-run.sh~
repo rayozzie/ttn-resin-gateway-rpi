@@ -52,7 +52,7 @@ echo ""
 
 # load the region-appropriate global conf
 
-if curl --fail https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GATEWAY_REGION-global_conf.json --output ./global_conf.json
+if curl -sS --fail https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GATEWAY_REGION-global_conf.json --output ./global_conf.json
 then
 	echo Successfully loaded $GATEWAY_REGION-global_conf.json from TTN repo
 else
@@ -65,8 +65,8 @@ fi
 
 # create local.conf
 
-echo -e "{\n\\
-t\"gateway_conf\": {\n\
+echo -e "{\n\
+\t\"gateway_conf\": {\n\
 \t\t\"gateway_ID\": \"0000000000000000\",\n\
 \t\t\"ref_latitude\": $GATEWAY_LAT,\n\
 \t\t\"ref_longitude\": $GATEWAY_LON,\n\
