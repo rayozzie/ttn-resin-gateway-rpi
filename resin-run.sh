@@ -65,8 +65,8 @@ fi
 
 # create local.conf
 
-echo -e "{\n\\
-t\"gateway_conf\": {\n\
+echo -e "{\n\
+\t\"gateway_conf\": {\n\
 \t\t\"gateway_ID\": \"0000000000000000\",\n\
 \t\t\"ref_latitude\": $GATEWAY_LAT,\n\
 \t\t\"ref_longitude\": $GATEWAY_LON,\n\
