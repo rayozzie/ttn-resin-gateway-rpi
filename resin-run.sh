@@ -69,7 +69,7 @@ if [[ $GW_GHOSTSTREAM == "" ]]; then GW_GHOSTSTREAM="false"; fi
 if [[ $GW_RADIOSTREAM == "" ]]; then GW_RADIOSTREAM="true"; fi
 if [[ $GW_STATUSSTREAM == "" ]]; then GW_STATUSSTREAM="true"; fi
 
-if [[ $GW_SERVER_ADDRESS == "" ]]; then GW_SERVER_ADDRESS="127.0.0.1"; fi
+if [[ $GW_SERVER_ADDRESS == "" ]]; then GW_SERVER_ADDRESS="\"127.0.0.1\""; fi
 if [[ $GW_SERV_PORT_UP == "" ]]; then GW_SERV_PORT_UP="1600"; fi
 if [[ $GW_SERV_PORT_DOWN == "" ]]; then GW_SERV_PORT_DOWN="1601"; fi
 
@@ -81,25 +81,25 @@ if [[ $GW_FORWARD_CRC_VALID == "" ]]; then GW_FORWARD_CRC_VALID="true"; fi
 if [[ $GW_FORWARD_CRC_ERROR == "" ]]; then GW_FORWARD_CRC_ERROR="false"; fi
 if [[ $GW_FORWARD_CRC_DISABLED == "" ]]; then GW_FORWARD_CRC_DISABLED="false"; fi
 
-if [[ $GW_GPS_TTY_PATH == "" ]]; then GW_GPS_TTY_PATH="/dev/ttyAMA0"; fi
+if [[ $GW_GPS_TTY_PATH == "" ]]; then GW_GPS_TTY_PATH="\"/dev/ttyAMA0\""; fi
 if [[ $GW_FAKE_GPS == "" ]]; then GW_FAKE_GPS="true"; fi
 
-if [[ $GW_GHOST_ADDRESS == "" ]]; then GW_GHOST_ADDRESS="127.0.0.1"; fi
+if [[ $GW_GHOST_ADDRESS == "" ]]; then GW_GHOST_ADDRESS="\"127.0.0.1\""; fi
 if [[ $GW_GHOST_PORT == "" ]]; then GW_GHOST_PORT="1918"; fi
 
-if [[ $GW_MONITOR_ADDRESS == "" ]]; then GW_MONITOR_ADDRESS="127.0.0.1"; fi
+if [[ $GW_MONITOR_ADDRESS == "" ]]; then GW_MONITOR_ADDRESS="\"127.0.0.1\""; fi
 if [[ $GW_MONITOR_PORT == "" ]]; then GW_MONITOR_PORT="2008"; fi
 
-if [[ $GW_SSH_PATH == "" ]]; then GW_SSH_PATH="/usr/bin/ssh"; fi
+if [[ $GW_SSH_PATH == "" ]]; then GW_SSH_PATH="\"/usr/bin/ssh\""; fi
 if [[ $GW_SSH_PORT == "" ]]; then GW_SSH_PORT="22"; fi
 
 if [[ $GW_HTTP_PORT == "" ]]; then GW_HTTP_PORT="80"; fi
 
-if [[ $GW_NGROK_PATH == "" ]]; then GW_NGROK_PATH="/usr/bin/ngrok"; fi
+if [[ $GW_NGROK_PATH == "" ]]; then GW_NGROK_PATH="\"/usr/bin/ngrok\""; fi
 
 if [[ $GW_SYSTEM_CALLS == "" ]]; then GW_SYSTEM_CALLS="[\"df -m\",\"free -h\",\"uptime\",\"who -a\",\"uname -a\"]"; fi
 
-if [[ $GW_PLATFORM == "" ]]; then GW_PLATFORM="*"; fi
+if [[ $GW_PLATFORM == "" ]]; then GW_PLATFORM="\"*\""; fi
 
 # create local.conf
 

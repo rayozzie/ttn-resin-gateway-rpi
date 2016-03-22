@@ -60,57 +60,56 @@ fi
 
 # set up environmental defaults for local.conf
 
-if [[ $GW_GPS == "" ]]; then $GW_GPS="true"; fi
-if [[ $GW_BEACON == "" ]]; then $GW_BEACON="false"; fi
-if [[ $GW_MONITOR == "" ]]; then $GW_MONITOR="false"; fi
-if [[ $GW_UPSTREAM == "" ]]; then $GW_UPSTREAM="true"; fi
-if [[ $GW_DOWNSTREAM == "" ]]; then $GW_DOWNSTREAM="true"; fi
-if [[ $GW_GHOSTSTREAM == "" ]]; then $GW_GHOSTSTREAM="false"; fi
-if [[ $GW_RADIOSTREAM == "" ]]; then $GW_RADIOSTREAM="true"; fi
-if [[ $GW_STATUSSTREAM == "" ]]; then $GW_STATUSSTREAM="true"; fi
+if [[ $GW_GPS == "" ]]; then GW_GPS="true"; fi
+if [[ $GW_BEACON == "" ]]; then GW_BEACON="false"; fi
+if [[ $GW_MONITOR == "" ]]; then GW_MONITOR="false"; fi
+if [[ $GW_UPSTREAM == "" ]]; then GW_UPSTREAM="true"; fi
+if [[ $GW_DOWNSTREAM == "" ]]; then GW_DOWNSTREAM="true"; fi
+if [[ $GW_GHOSTSTREAM == "" ]]; then GW_GHOSTSTREAM="false"; fi
+if [[ $GW_RADIOSTREAM == "" ]]; then GW_RADIOSTREAM="true"; fi
+if [[ $GW_STATUSSTREAM == "" ]]; then GW_STATUSSTREAM="true"; fi
 
-if [[ $GW_SERVER_ADDRESS == "" ]]; then $GW_SERVER_ADDRESS="127.0.0.1"; fi
-if [[ $GW_SERV_PORT_UP == "" ]]; then $GW_SERV_PORT_UP="1600"; fi
-if [[ $GW_SERV_PORT_DOWN == "" ]]; then $GW_SERV_PORT_DOWN="1601"; fi
+if [[ $GW_SERVER_ADDRESS == "" ]]; then GW_SERVER_ADDRESS="127.0.0.1"; fi
+if [[ $GW_SERV_PORT_UP == "" ]]; then GW_SERV_PORT_UP="1600"; fi
+if [[ $GW_SERV_PORT_DOWN == "" ]]; then GW_SERV_PORT_DOWN="1601"; fi
 
-if [[ $GW_KEEPALIVE_INTERVAL == "" ]]; then $GW_KEEPALIVE_INTERVAL="10"; fi
-if [[ $GW_STAT_INTERVAL == "" ]]; then $GW_STAT_INTERVAL="30"; fi
-if [[ $GW_PUSH_TIMEOUT_MS == "" ]]; then $GW_PUSH_TIMEOUT_MS="100"; fi
+if [[ $GW_KEEPALIVE_INTERVAL == "" ]]; then GW_KEEPALIVE_INTERVAL="10"; fi
+if [[ $GW_STAT_INTERVAL == "" ]]; then GW_STAT_INTERVAL="30"; fi
+if [[ $GW_PUSH_TIMEOUT_MS == "" ]]; then GW_PUSH_TIMEOUT_MS="100"; fi
 
-if [[ $GW_FORWARD_CRC_VALID == "" ]]; then $GW_FORWARD_CRC_VALID="true"; fi
-if [[ $GW_FORWARD_CRC_ERROR == "" ]]; then $GW_FORWARD_CRC_ERROR="false"; fi
-if [[ $GW_FORWARD_CRC_DISABLED == "" ]]; then $GW_FORWARD_CRC_DISABLED="false"; fi
+if [[ $GW_FORWARD_CRC_VALID == "" ]]; then GW_FORWARD_CRC_VALID="true"; fi
+if [[ $GW_FORWARD_CRC_ERROR == "" ]]; then GW_FORWARD_CRC_ERROR="false"; fi
+if [[ $GW_FORWARD_CRC_DISABLED == "" ]]; then GW_FORWARD_CRC_DISABLED="false"; fi
 
-if [[ $GW_GPS_TTY_PATH == "" ]]; then $GW_GPS_TTY_PATH="/dev/ttyAMA0"; fi
-if [[ $GW_FAKE_GPS == "" ]]; then $GW_FAKE_GPS="true"; fi
+if [[ $GW_GPS_TTY_PATH == "" ]]; then GW_GPS_TTY_PATH="/dev/ttyAMA0"; fi
+if [[ $GW_FAKE_GPS == "" ]]; then GW_FAKE_GPS="true"; fi
 
-if [[ $GW_GHOST_ADDRESS == "" ]]; then $GW_GHOST_ADDRESS="127.0.0.1"; fi
-if [[ $GW_GHOST_PORT == "" ]]; then $GW_GHOST_PORT="1918"; fi
+if [[ $GW_GHOST_ADDRESS == "" ]]; then GW_GHOST_ADDRESS="127.0.0.1"; fi
+if [[ $GW_GHOST_PORT == "" ]]; then GW_GHOST_PORT="1918"; fi
 
-if [[ $GW_MONITOR_ADDRESS == "" ]]; then $GW_MONITOR_ADDRESS="127.0.0.1"; fi
-if [[ $GW_MONITOR_PORT == "" ]]; then $GW_MONITOR_PORT="2008"; fi
+if [[ $GW_MONITOR_ADDRESS == "" ]]; then GW_MONITOR_ADDRESS="127.0.0.1"; fi
+if [[ $GW_MONITOR_PORT == "" ]]; then GW_MONITOR_PORT="2008"; fi
 
-if [[ $GW_SSH_PATH == "" ]]; then $GW_SSH_PATH="/usr/bin/ssh"; fi
-if [[ $GW_SSH_PORT == "" ]]; then $GW_SSH_PORT="22"; fi
+if [[ $GW_SSH_PATH == "" ]]; then GW_SSH_PATH="/usr/bin/ssh"; fi
+if [[ $GW_SSH_PORT == "" ]]; then GW_SSH_PORT="22"; fi
 
-if [[ $GW_HTTP_PORT == "" ]]; then $GW_HTTP_PORT="80"; fi
+if [[ $GW_HTTP_PORT == "" ]]; then GW_HTTP_PORT="80"; fi
 
-if [[ $GW_NGROK_PATH == "" ]]; then $GW_NGROK_PATH="/usr/bin/ngrok"; fi
+if [[ $GW_NGROK_PATH == "" ]]; then GW_NGROK_PATH="/usr/bin/ngrok"; fi
 
-if [[ $GW_SYSTEM_CALLS == "" ]]; then $GW_SYSTEM_CALLS="[\"df -m\",\"free -h\",\"uptime\",\"who -a\",\"uname -a\"]"; fi
+if [[ $GW_SYSTEM_CALLS == "" ]]; then GW_SYSTEM_CALLS="[\"df -m\",\"free -h\",\"uptime\",\"who -a\",\"uname -a\"]"; fi
 
-if [[ $GW_PLATFORM == "" ]]; then $GW_PLATFORM="*"; fi
+if [[ $GW_PLATFORM == "" ]]; then GW_PLATFORM="*"; fi
 
 # create local.conf
 
 echo -e "{\n\
 \t\"gateway_conf\": {\n\
-\t\t\"gateway_ID\": \"0000000000000000\",\n\
 \t\t\"ref_latitude\": $GW_REF_LATITUDE,\n\
 \t\t\"ref_longitude\": $GW_REF_LONGITUDE,\n\
 \t\t\"ref_altitude\": $GW_REF_ALTITUDE,\n\
 \t\t\"contact_email\": \"$GW_CONTACT_EMAIL\",\n\
-\t\t\"description\": \"$GW_DESCRIPTION\" \n\
+\t\t\"description\": \"$GW_DESCRIPTION\", \n\
 \t\t\"gps\": $GW_GPS,\n\
 \t\t\"beacon\": $GW_BEACON,\n\
 \t\t\"monitor\": $GW_MONITOR,\n\
@@ -140,6 +139,7 @@ echo -e "{\n\
 \t\t\"ngrok_path\": $GW_NGROK_PATH,\n\
 \t\t\"system_calls\": $GW_SYSTEM_CALLS,\n\
 \t\t\"platform\": $GW_PLATFORM,\n\
+\t\t\"gateway_ID\": \"0000000000000000\"\n\
 \t}\n\
 }" >./local_conf.json
 
