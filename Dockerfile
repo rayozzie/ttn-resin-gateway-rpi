@@ -8,7 +8,6 @@ COPY . ~/ttn-gateway
 
 # Build the gateway
 WORKDIR ~/ttn-gateway
-RUN ls -la
 RUN ./resin-install.sh
 
 # Make sure we start up within the bin directory
