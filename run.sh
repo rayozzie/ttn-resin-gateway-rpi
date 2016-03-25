@@ -45,7 +45,7 @@ fi
 echo "******************"
 echo ""
 
-# Load the region-appropriate global conf
+# Load the region-appropriate global config
 
 if curl -sS --fail https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/$GW_REGION-global_conf.json --output ./global_conf.json
 then
