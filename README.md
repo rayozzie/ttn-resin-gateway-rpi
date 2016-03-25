@@ -30,15 +30,15 @@ GW_REF_LATITUDE	   |52.376364
 GW_REF_LONGITUDE   |4.884232
 GW_REF_ALTITUDE	   |3
 
-iC880a pin      | Description   | RPi physical pin
-----------------|---------------|-----------------
-21              | Supply 5V     | 2
-22              | GND           | 6
-13              | Reset         | 22
-14              | SPI CLK       | 23
-15              | MISO          | 21
-16              | MOSI          | 19
-17              | NSS           | 24
+Name      	  	  | Value  
+------------------|--------------------------  
+21                | yourname@yourdomain.com     
+22                | your-gateway-1  
+13                | EU
+14                | 52.376364       
+GW_REF_LONGITUDE  | 4.884232          
+GW_REF_ALTITUDE   | 3          
+
 
 iC880a pin      | Description
 ----------------|---------------
@@ -49,6 +49,16 @@ iC880a pin      | Description
 15              | MISO          
 16              | MOSI          
 17              | NSS           
+
+iC880a pin      | Description   | RPi physical pin
+----------------|---------------|-----------------
+21              | Supply 5V     | 2
+22              | GND           | 6
+13              | Reset         | 22
+14              | SPI CLK       | 23
+15              | MISO          | 21
+16              | MOSI          | 19
+17              | NSS           | 24
 
 iC880a pin      | Description   | RPi physical pin
 ----------------|---------------|-----------------
