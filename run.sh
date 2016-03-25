@@ -47,7 +47,7 @@ echo ""
 
 # load the region-appropriate global conf
 
-if curl -sS --fail https://raw.githubusercontent.com/rayozzie/ttn-gateway-conf/master/$GW_REGION-global_conf.json --output ./global_conf.json
+if curl -sS --fail https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/$GW_REGION-global_conf.json --output ./global_conf.json
 then
 	echo Successfully loaded $GW_REGION-global_conf.json from TTN repo
 else
