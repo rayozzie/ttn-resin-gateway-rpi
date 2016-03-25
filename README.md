@@ -20,15 +20,14 @@ Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/
 
 1. Click the "Environment Variables" section at the left side of the screen.  This will allow you to configure environment parameters for this and only this device, and which will be appropriately inserted into this device's "local_conf.json" with lowercase tuple names derived from the appropriate uppercase environment names beginning with "GW_".  For example, for a gateway with no GPS, the MINIMUM environment variables that you should configure at this screen should look something like this:
 
-   DEVICE ENVIRONMENT VARIABLES
-   Name	  			  Value
-
-   GW_CONTACT_EMAIL	  yourname@yourdomain.com
-   GW_DESCRIPTION	  your-gateway-1
-   GW_REGION		  EU
-   GW_REF_LATITUDE	  52.376364
-   GW_REF_LONGITUDE	  4.884232
-   GW_REF_ALTITUDE	  3  
+   |DEVICE ENVIRONMENT VARIABLES	 		 	|
+   |Name	  		   |Value					|
+   |GW_CONTACT_EMAIL   |yourname@yourdomain.com	|
+   |GW_DESCRIPTION	   |your-gateway-1			|
+   |GW_REGION		   |EU						|
+   |GW_REF_LATITUDE	   |52.376364				|
+   |GW_REF_LONGITUDE   |4.884232				|
+   |GW_REF_ALTITUDE	   |3						|  
 
 ## TRANSFERRING TTN GATEWAY SOFTWARE TO RESIN SO THAT IT MAY BE DOWNLOADED ON YOUR DEVICES
 
@@ -67,6 +66,6 @@ Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/
 
 # Credits
 
-[Gonzalo Casas](https://github.com/gonzalocasas] on the [iC880a-based gateway](https://github.com/ttn-zh/ic880a-gateway/tree/spi)
-[Ruud Vlaming](https://github.com/devlaam) on the [Lorank8 installer](https://github.com/Ideetron/Lorank)
-The team at resin.io [https://resin.io/team/]
+[Gonzalo Casas](https://github.com/gonzalocasas] on the [iC880a-based gateway](https://github.com/ttn-zh/ic880a-gateway/tree/spi)  
+[Ruud Vlaming](https://github.com/devlaam) on the [Lorank8 installer](https://github.com/Ideetron/Lorank)  
+[The Entire Team] at resin.io (https://resin.io/team/)  
