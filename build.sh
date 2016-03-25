@@ -14,16 +14,16 @@ if [[ $1 != "" ]]; then VERSION=$1; fi
 echo "The Things Network Gateway installer"
 echo ""
 
-# Check dependencies
-echo "Installing dependencies..."
-#apt-get update
-#apt-get install swig libftdi-dev python-dev
-#apt-get install swig python-dev
+# We will build in a place that we will purge after build,
+# and will install just the required files in the appropriate place
 
-# Install LoRaWAN packet forwarder repositories
+BUILD_DIR="/tmp/ttn-gateway"
 INSTALL_DIR="/opt/ttn-gateway"
+
 if [ ! -d "$INSTALL_DIR" ]; then mkdir $INSTALL_DIR; fi
-pushd $INSTALL_DIR
+if [ ! -d "$BUILD_DIR" ]; then mkdir $BUILD_DIR; fi
+
+pushd $BUILD_DIR
 
 # Build WiringPi
 if [ ! -d wiringPi ]; then
@@ -39,7 +39,7 @@ fi
 
 popd
 
-# Build LoRa gateway app
+# Build LoRa gateway app for this specific platform
 if [ ! -d lora_gateway ]; then
     git clone https://github.com/TheThingsNetwork/lora_gateway.git
     pushd lora_gateway
@@ -50,7 +50,7 @@ else
 fi
 
 sed -i -e 's/PLATFORM= kerlink/PLATFORM= imst_rpi/g' ./libloragw/library.cfg
-sed -i -e 's/DEBUG_HAL= 0/DEBUG_HAL= 1/g' ./libloragw/library.cfg
+# sed -i -e 's/DEBUG_HAL= 0/DEBUG_HAL= 1/g' ./libloragw/library.cfg
 
 make
 
@@ -70,13 +70,16 @@ make
 
 popd
 
-# Symlink poly packet forwarder
-if [ ! -d bin ]; then mkdir bin; fi
+# Copy packet forwarder to where we will need it
 if [ -f ./bin/poly_pkt_fwd ]; then rm ./bin/poly_pkt_fwd; fi
-ln -s $INSTALL_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd ./bin/poly_pkt_fwd
+cp ./poly_pkt_fwd $INSTALL_DIR/poly_pkt_fwd
 
-# Restore location back to where we started the install
+# Restore location back to where we started the build
 
 popd
 
-echo "Installation completed."
+# Delete the build folder so that we save space
+
+rm -rf $BUILD_DIR
+
+echo "Build completed."
