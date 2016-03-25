@@ -1,7 +1,12 @@
 FROM resin/raspberrypi-buildpack-deps
 
-# Enable systemd
+# Enable systemd, as Resin requires this
 ENV INITSYSTEM on
+
+# Version number of gateway software
+# (Incrementing this simply forces Docker to flush its cache
+#  and thus forces a full rebuild.)
+ENV TTN_GATEWAY_SOFTWARE 45
 
 # Build the gateway
 COPY build.sh /tmp/build.sh
