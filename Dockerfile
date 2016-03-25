@@ -4,8 +4,8 @@ FROM resin/raspberrypi-buildpack-deps
 ENV INITSYSTEM on
 
 # Build the gateway
-COPY build.sh /ttn-gateway/build.sh
-WORKDIR /ttn-gateway
+COPY build.sh /tmp/build.sh
+WORKDIR /tmp
 RUN ./build.sh
 
 # Copy the run shell script after build, so we can modify it without rebuilding

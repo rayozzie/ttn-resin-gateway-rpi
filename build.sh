@@ -28,7 +28,6 @@ popd
 git clone https://github.com/TheThingsNetwork/lora_gateway.git
 pushd lora_gateway
 sed -i -e 's/PLATFORM= kerlink/PLATFORM= imst_rpi/g' ./libloragw/library.cfg
-# sed -i -e 's/DEBUG_HAL= 0/DEBUG_HAL= 1/g' ./libloragw/library.cfg
 make
 popd
 

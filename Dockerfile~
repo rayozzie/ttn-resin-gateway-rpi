@@ -9,8 +9,8 @@ WORKDIR /ttn-gateway
 RUN ./build.sh
 
 # Copy the run shell script after build, so we can modify it without rebuilding
-COPY run.sh /opt/ttn-gateway/bin/run.sh
-WORKDIR /opt/ttn-gateway/bin
+COPY run.sh /opt/ttn-gateway/run.sh
+WORKDIR /opt/ttn-gateway
 
 # Start it up
 CMD ["sh", "-c", "./run.sh"]
