@@ -2,7 +2,7 @@
 
 Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/) gateways based on the iC880a concentrator with a Raspberry Pi host, connected using SPI.
 
-## Using this with Resin
+## Instructions
 
 - Download [Raspbian Jessie](https://www.raspberrypi.org/downloads/)
 - Follow the [installation instruction](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to create the SD card
