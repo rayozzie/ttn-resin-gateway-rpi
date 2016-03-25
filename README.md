@@ -21,6 +21,7 @@ Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/
 1. Click the "Environment Variables" section at the left side of the screen.  This will allow you to configure environment parameters for this and only this device, and which will be appropriately inserted into this device's "local_conf.json" with lowercase tuple names derived from the appropriate uppercase environment names beginning with "GW_".  For example, for a gateway with no GPS, the MINIMUM environment variables that you should configure at this screen should look something like this:
 
 DEVICE ENVIRONMENT VARIABLES  
+
 Name      	  	  | Value  
 ------------------|--------------------------  
 GW_REGION         | EU
