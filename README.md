@@ -58,10 +58,15 @@ Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/
 
 - Resin will automatically restart the gateway software any time you change the environment variables.  You'll see this in the log.  Also, note that Resin restarts the gateway properly after power failures.  If the packet forwarder fails because of an error, it will also automatically attempt to restart.
 
-- If you'd like to update the software across all the gateways in your device fleet, simply do another "git push resin master", which will rebuild the software 
+- If you'd like to update the software across all the gateways in your device fleet, simply do the following:
+
+  Edit the Dockerfile to bump the TTN_GATEWAY_VERSION number
+  git add .
+  git commit -m "Updated gateway version"
+  git push resin master"
 
 # Credits
 
-These scripts are largely based on the work of:
 [Gonzalo Casas](https://github.com/gonzalocasas] on the [iC880a-based gateway](https://github.com/ttn-zh/ic880a-gateway/tree/spi)
 [Ruud Vlaming](https://github.com/devlaam) on the [Lorank8 installer](https://github.com/Ideetron/Lorank)
+The team at resin.io [https://resin.io/team/]
