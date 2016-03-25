@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Stop on the first sign of trouble
+# Stop on the first sign of trouble!
 set -e
 
 echo "The Things Network RPi + IC880A Gateway Builder/Installer"

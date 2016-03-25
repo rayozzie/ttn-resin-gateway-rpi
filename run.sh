@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Configure the global and local configuration files via the environment
+# Ensure that we've got the required env vars
 
 echo "*******************"
 echo "*** Configuration:"
@@ -45,7 +45,7 @@ fi
 echo "******************"
 echo ""
 
-# load the region-appropriate global conf
+# Load the region-appropriate global conf
 
 if curl -sS --fail https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/$GW_REGION-global_conf.json --output ./global_conf.json
 then
@@ -58,7 +58,7 @@ else
     exit 1
 fi
 
-# fetch location info, which we'll use as a hint to the gateway software
+# Fetch location info, which we'll use as a hint to the gateway software
 
 if curl -sS --fail ipinfo.io --output ./ipinfo.json
 then
@@ -70,7 +70,7 @@ else
 	IPINFO="\"\""
 fi
 
-# set up environmental defaults for local.conf
+# Set up environmental defaults for local.conf
 
 if [[ $GW_GPS == "" ]]; then GW_GPS="true"; fi
 if [[ $GW_BEACON == "" ]]; then GW_BEACON="false"; fi
@@ -109,7 +109,7 @@ if [[ $GW_SYSTEM_CALLS == "" ]]; then GW_SYSTEM_CALLS="[\"df -m\",\"free -h\",\"
 
 if [[ $GW_PLATFORM == "" ]]; then GW_PLATFORM="\"*\""; fi
 
-# create local.conf
+# Synthesize local.conf JSON from env vars
 
 echo -e "{\n\
 \t\"gateway_conf\": {\n\
@@ -149,7 +149,7 @@ echo -e "{\n\
 \t}\n\
 }" >./local_conf.json
 
-# Reset gateway ID based on MAC
+# Set gateway_ID in local_conf.json to the gateway's MAC address
 
 echo "******************"
 ../packet_forwarder/reset_pkt_fwd.sh start ./local_conf.json
@@ -157,12 +157,14 @@ echo "******************"
 echo ""
 
 # Test the connection, wait if needed.
+
 while [[ $(ping -c1 google.com 2>&1 | grep " 0% packet loss") == "" ]]; do
   echo "[TTN Gateway]: Waiting for internet connection..."
   sleep 30
   done
 
 # Fire up the forwarder.  
+
 while true
   do
     echo "[TTN Gateway]: Starting packet forwarder..."
