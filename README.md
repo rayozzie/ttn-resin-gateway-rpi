@@ -31,18 +31,6 @@ GW_REF_LATITUDE   | 52.376364
 GW_REF_LONGITUDE  | 4.884232          
 GW_REF_ALTITUDE   | 3          
 
-    DEVICE ENVIRONMENT VARIABLES  
-
-    Name              | Value  
-    ------------------|--------------------------  
-    GW_REGION         | EU
-    GW_CONTACT_EMAIL  | yourname@yourdomain.com     
-    GW_DESCRIPTION    | your-gateway-1  
-    GW_REF_LATITUDE   | 52.376364       
-    GW_REF_LONGITUDE  | 4.884232          
-    GW_REF_ALTITUDE   | 3          
-
-
 ## TRANSFERRING TTN GATEWAY SOFTWARE TO RESIN SO THAT IT MAY BE DOWNLOADED ON YOUR DEVICES
 
 1. On your Mac or PC, in terminal, change your working directory to the directory that is the clone of **this** git repo.
