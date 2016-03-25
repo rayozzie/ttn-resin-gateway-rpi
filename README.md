@@ -30,6 +30,36 @@ GW_REF_LATITUDE	   |52.376364
 GW_REF_LONGITUDE   |4.884232
 GW_REF_ALTITUDE	   |3
 
+iC880a pin      | Description   | RPi physical pin
+----------------|---------------|-----------------
+21              | Supply 5V     | 2
+22              | GND           | 6
+13              | Reset         | 22
+14              | SPI CLK       | 23
+15              | MISO          | 21
+16              | MOSI          | 19
+17              | NSS           | 24
+
+iC880a pin      | Description
+----------------|---------------
+21              | Supply 5V     
+22              | GND           
+13              | Reset         
+14              | SPI CLK       
+15              | MISO          
+16              | MOSI          
+17              | NSS           
+
+iC880a pin      | Description   | RPi physical pin
+----------------|---------------|-----------------
+21              | Supply 5V     | 2
+22              | GND           | 6
+13              | Reset         | 22
+14              | SPI CLK       | 23
+15              | MISO          | 21
+16              | MOSI          | 19
+17              | NSS           | 24
+
 ## TRANSFERRING TTN GATEWAY SOFTWARE TO RESIN SO THAT IT MAY BE DOWNLOADED ON YOUR DEVICES
 
 1. On your Mac or PC, in terminal, change your working directory to the directory that is the clone of **this** git repo.
