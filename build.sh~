@@ -70,16 +70,13 @@ make
 
 popd
 
-# Copy packet forwarder to where we will need it
-if [ -f ./bin/poly_pkt_fwd ]; then rm ./bin/poly_pkt_fwd; fi
-cp ./poly_pkt_fwd $INSTALL_DIR/poly_pkt_fwd
-
 # Restore location back to where we started the build
-
 popd
 
-# Delete the build folder so that we save space
+# Copy packet forwarder to where we will need it
+cp $BUILD_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd $INSTALL_DIR/poly_pkt_fwd
 
+# Delete the build folder so that we save space
 rm -rf $BUILD_DIR
 
 echo "Build completed."
