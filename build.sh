@@ -31,7 +31,7 @@ sed -i -e 's/PLATFORM= kerlink/PLATFORM= imst_rpi/g' ./libloragw/library.cfg
 # Comment the following in or out as needed for hardware debugging
 #sed -i -e 's/DEBUG_AUX= 0/DEBUG_AUX= 1/g' ./libloragw/library.cfg
 sed -i -e 's/DEBUG_SPI= 0/DEBUG_SPI= 1/g' ./libloragw/library.cfg
-#sed -i -e 's/DEBUG_REG= 0/DEBUG_REG= 1/g' ./libloragw/library.cfg
+sed -i -e 's/DEBUG_REG= 0/DEBUG_REG= 1/g' ./libloragw/library.cfg
 sed -i -e 's/DEBUG_HAL= 0/DEBUG_HAL= 1/g' ./libloragw/library.cfg
 #sed -i -e 's/DEBUG_GPS= 0/DEBUG_GPS= 1/g' ./libloragw/library.cfg
 make
