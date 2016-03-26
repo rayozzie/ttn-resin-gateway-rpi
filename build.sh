@@ -47,7 +47,7 @@ popd
 popd
 
 # Copy things needed at runtime to where they'll be expected
-cp $BUILD_DIR/packet_forwarder/poly_pkt_fwd/reset_pkt_fwd.sh $INSTALL_DIR/reset_pkt_fwd.sh
+cp $BUILD_DIR/packet_forwarder/reset_pkt_fwd.sh $INSTALL_DIR/reset_pkt_fwd.sh
 cp $BUILD_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd $INSTALL_DIR/poly_pkt_fwd
 
 echo "Build & Installation Completed."
