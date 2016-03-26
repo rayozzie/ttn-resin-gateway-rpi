@@ -9,8 +9,8 @@ ENV INITSYSTEM on
 ENV TTN_GATEWAY_SOFTWARE 48
 
 # Build the gateway
-COPY build.sh /tmp/build.sh
-WORKDIR /tmp
+COPY build.sh /opt/ttn-gateway/dev/build.sh
+WORKDIR /opt/ttn-gateway/dev
 RUN ./build.sh
 
 # Copy the run shell script after build, so we can modify it without rebuilding

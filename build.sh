@@ -46,12 +46,8 @@ popd
 # Restore location back to where we were prior to starting the build
 popd
 
-# Copy packet forwarder to where it'll be expected
+# Copy things needed at runtime to where they'll be expected
 cp $BUILD_DIR/packet_forwarder/poly_pkt_fwd/reset_pkt_fwd.sh $INSTALL_DIR/reset_pkt_fwd.sh
 cp $BUILD_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd $INSTALL_DIR/poly_pkt_fwd
-
-# Delete the build folder if we need space, 
-# else leave it around for on-device debugging/building
-# rm -rf $BUILD_DIR
 
 echo "Build & Installation Completed."
