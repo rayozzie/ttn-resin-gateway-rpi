@@ -9,11 +9,11 @@ echo ""
 # Build in a temp folder that we'll completely  purge after build,
 # and install into the linux folder where apps reside.
 
-BUILD_DIR="/tmp/ttn-gateway"
-mkdir $BUILD_DIR
-
 INSTALL_DIR="/opt/ttn-gateway"
 mkdir $INSTALL_DIR
+
+BUILD_DIR="$INSTALL_DIR/dev"
+mkdir $BUILD_DIR
 
 # Switch to where we'll do the builds
 pushd $BUILD_DIR
