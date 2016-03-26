@@ -11,7 +11,7 @@ ENV TTN_GATEWAY_SOFTWARE 48
 # Build the gateway
 COPY build.sh /opt/ttn-gateway/dev/build.sh
 WORKDIR /opt/ttn-gateway/dev
-RUN ./build.sh
+RUN ./build.sh && rm -rf /opt/ttn-gateway/dev
 
 # Copy the run shell script after build, so we can modify it without rebuilding
 COPY run.sh /opt/ttn-gateway/run.sh
