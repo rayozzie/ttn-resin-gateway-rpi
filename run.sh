@@ -146,7 +146,7 @@ echo -e "{\n\
 # Set gateway_ID in local_conf.json to the gateway's MAC address
 
 echo "******************"
-../packet_forwarder/reset_pkt_fwd.sh start ./local_conf.json
+./reset_pkt_fwd.sh start ./local_conf.json
 echo "******************"
 echo ""
 

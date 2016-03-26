@@ -47,6 +47,7 @@ popd
 popd
 
 # Copy packet forwarder to where it'll be expected
+cp $BUILD_DIR/packet_forwarder/poly_pkt_fwd/reset_pkt_fwd.sh $INSTALL_DIR/reset_pkt_fwd.sh
 cp $BUILD_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd $INSTALL_DIR/poly_pkt_fwd
 
 # Delete the build folder if we need space, 
