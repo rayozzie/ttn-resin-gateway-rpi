@@ -19,14 +19,26 @@ if [ ! -d "$BUILD_DIR" ]; then mkdir $BUILD_DIR; fi
 pushd $BUILD_DIR
 
 # Build WiringPi so that we can do Raspberry Pi I/O
-git clone git://git.drogon.net/wiringPi
-pushd wiringPi
+if [ ! -d wiringPi ]; then
+    git clone git://git.drogon.net/wiringPi
+    pushd wiringPi
+else
+    pushd wiringPi
+    git reset --hard
+    git pull
+fi
 ./build
 popd
 
 # Build LoRa gateway app for this specific platform
-git clone https://github.com/TheThingsNetwork/lora_gateway.git
-pushd lora_gateway
+if [ ! -d lora_gateway ]; then
+    git clone https://github.com/TheThingsNetwork/lora_gateway.git
+    pushd lora_gateway
+else
+    pushd lora_gateway
+    git reset --hard
+    git pull
+fi
 sed -i -e 's/PLATFORM= kerlink/PLATFORM= imst_rpi/g' ./libloragw/library.cfg
 # Comment the following in or out as needed for hardware debugging
 #sed -i -e 's/DEBUG_SPI= 0/DEBUG_SPI= 1/g' ./libloragw/library.cfg
@@ -38,8 +50,14 @@ make
 popd
 
 # Build the packet forwarder
-git clone https://github.com/TheThingsNetwork/packet_forwarder.git
-pushd packet_forwarder
+if [ ! -d packet_forwarder ]; then
+    git clone https://github.com/TheThingsNetwork/packet_forwarder.git
+    pushd packet_forwarder
+else
+    pushd packet_forwarder
+    git pull
+    git reset --hard
+fi
 make
 popd
 
