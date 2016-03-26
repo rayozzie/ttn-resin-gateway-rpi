@@ -1,5 +1,8 @@
 #! /bin/bash
 
+echo "**** exiting ***"
+exit 1
+
 # Ensure that we've got the required env vars
 
 echo "*******************"
