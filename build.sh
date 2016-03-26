@@ -10,10 +10,10 @@ echo ""
 # and install into the linux folder where apps reside.
 
 INSTALL_DIR="/opt/ttn-gateway"
-mkdir $INSTALL_DIR
+if [ ! -d "$INSTALL_DIR" ]; then mkdir $INSTALL_DIR; fi
 
 BUILD_DIR="$INSTALL_DIR/dev"
-mkdir $BUILD_DIR
+if [ ! -d "$BUILD_DIR" ]; then mkdir $BUILD_DIR; fi
 
 # Switch to where we'll do the builds
 pushd $BUILD_DIR
