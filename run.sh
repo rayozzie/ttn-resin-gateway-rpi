@@ -1,8 +1,5 @@
 #! /bin/bash
 
-echo "**** exiting ***"
-exit 1
-
 # Ensure that we've got the required env vars
 
 echo "*******************"
@@ -11,37 +8,32 @@ echo "*******************"
 
 if [[ $GW_REGION == "" ]]; then
     echo "ERROR: GW_REGION required"
-    while true; do sleep 10; done
+	exit 1
 fi
 echo GW_REGION: $GW_REGION
 
 if [[ $GW_DESCRIPTION == "" ]]; then
     echo "ERROR: GW_DESCRIPTION required"
-    while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_CONTACT_EMAIL == "" ]]; then
     echo "ERROR: GW_CONTACT_EMAIL required"
-    while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_LATITUDE == "" ]]; then
     echo "ERROR: GW_REF_LATITUDE required"
-    while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_LONGITUDE == "" ]]; then
     echo "ERROR: GW_REF_LONGITUDE required"
-    while true; do sleep 10; done # don't exit in resin
 	exit 1
 fi
 
 if [[ $GW_REF_ALTITUDE == "" ]]; then
     echo "ERROR: GW_REF_ALTITUDE required"
-    while true; do sleep 10; done # don't exit in resin
     exit 1
 fi
 
@@ -57,7 +49,6 @@ else
 	echo "******************"
     echo "ERROR: GW_REGION not found"
 	echo "******************"
-    while true; do sleep 10; done # don't exit in resin
     exit 1
 fi
 
