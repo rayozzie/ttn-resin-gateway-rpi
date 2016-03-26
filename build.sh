@@ -50,6 +50,6 @@ popd
 cp $BUILD_DIR/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd $INSTALL_DIR/poly_pkt_fwd
 
 # Delete the build folder so that we save space
-rm -rf $BUILD_DIR
+# rm -rf $BUILD_DIR
 
 echo "Build & Installation Completed."
