@@ -1,5 +1,12 @@
 #! /bin/bash
 
+# Exit if we're debugging and haven't yet built the gateway
+
+if [ ! -f  "ttn-gateway" ]; then
+	echo "ERROR: gateway executable not yet built"
+	exit 1
+fi
+
 # We need to be online, wait if needed.
 
 while [[ $(ping -c1 google.com 2>&1 | grep " 0% packet loss") == "" ]]; do
@@ -153,7 +160,7 @@ echo -e "{\n\
 # Set gateway_ID in local_conf.json to the gateway's MAC address
 
 echo "******************"
-./reset_pkt_fwd.sh start ./local_conf.json
+./set-gateway-id.sh start ./local_conf.json
 echo "******************"
 echo ""
 
@@ -172,7 +179,7 @@ sleep 0.1
 while true
   do
     echo "[TTN Gateway]: Starting packet forwarder..."
-    ./poly_pkt_fwd
+    ./ttn-gateway
 	echo "******************"
     echo "*** [TTN Gateway]: EXIT (retrying in 15s)"
 	echo "******************"

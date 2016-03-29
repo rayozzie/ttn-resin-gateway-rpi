@@ -8,14 +8,12 @@ ENV INITSYSTEM on
 #  and thus forces a full rebuild. Not used outside of Dockerfile.)
 ENV TTN_GATEWAY_SOFTWARE 48
 
-# Build the gateway
-COPY build.sh /opt/ttn-gateway/dev/build.sh
-WORKDIR /opt/ttn-gateway/dev
-RUN ./build.sh && rm -rf /opt/ttn-gateway/dev
+# Copy the build and run environment
+COPY . /opt/ttn-gateway/
+WORKDIR /opt/ttn-gateway/
 
-# Copy the run shell script after build, so we can modify it without rebuilding
-COPY run.sh /opt/ttn-gateway/run.sh
-WORKDIR /opt/ttn-gateway
+# Build the gateway (or comment this out if debugging on-device)
+RUN ./dev/build.sh && rm -rf ./dev
 
 # Start it up
 CMD ["sh", "-c", "./run.sh"]
