@@ -65,6 +65,10 @@ fi
 
 # Set up environmental defaults for local.conf
 
+if [[ $GW_REF_LATITUDE == "" ]]; then GW_REF_LATITUDE="52.376364"; fi
+if [[ $GW_REF_LONGITUDE == "" ]]; then GW_REF_LONGITUDE="4.884232"; fi
+if [[ $GW_REF_ALTITUDE == "" ]]; then GW_REF_ALTITUDE="3"; fi
+
 if [[ $GW_GPS == "" ]]; then GW_GPS="true"; fi
 if [[ $GW_BEACON == "" ]]; then GW_BEACON="false"; fi
 if [[ $GW_MONITOR == "" ]]; then GW_MONITOR="false"; fi
