@@ -7,6 +7,11 @@ if [ ! -f  "ttn-gateway" ]; then
 	exit 1
 fi
 
+if [[ $GW_DEBUG != "" ]]; then
+    echo "*** GW_DEBUG asserted - exiting ***"
+    exit 1
+fi
+
 # We need to be online, wait if needed.
 
 until $(curl --output /dev/null --silent --head --fail http://www.google.com); do
@@ -86,7 +91,7 @@ if [[ $GW_FORWARD_CRC_VALID == "" ]]; then GW_FORWARD_CRC_VALID="true"; fi
 if [[ $GW_FORWARD_CRC_ERROR == "" ]]; then GW_FORWARD_CRC_ERROR="false"; fi
 if [[ $GW_FORWARD_CRC_DISABLED == "" ]]; then GW_FORWARD_CRC_DISABLED="false"; fi
 
-if [[ $GW_GPS_TTY_PATH == "" ]]; then GW_GPS_TTY_PATH="\"/dev/ttyAMA0\""; fi
+if [[ $GW_GPS_TTY_PATH == "" ]]; then GW_GPS_TTY_PATH="\"/dev/ttyS0\""; fi
 if [[ $GW_FAKE_GPS == "" ]]; then GW_FAKE_GPS="false"; fi
 
 if [[ $GW_GHOST_ADDRESS == "" ]]; then GW_GHOST_ADDRESS="\"127.0.0.1\""; fi
