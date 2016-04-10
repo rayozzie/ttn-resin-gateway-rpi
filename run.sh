@@ -36,21 +36,6 @@ if [[ $GW_CONTACT_EMAIL == "" ]]; then
 	exit 1
 fi
 
-if [[ $GW_REF_LATITUDE == "" ]]; then
-    echo "ERROR: GW_REF_LATITUDE required"
-	exit 1
-fi
-
-if [[ $GW_REF_LONGITUDE == "" ]]; then
-    echo "ERROR: GW_REF_LONGITUDE required"
-	exit 1
-fi
-
-if [[ $GW_REF_ALTITUDE == "" ]]; then
-    echo "ERROR: GW_REF_ALTITUDE required"
-    exit 1
-fi
-
 echo "******************"
 echo ""
 
