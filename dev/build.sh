@@ -6,6 +6,11 @@ set -e
 echo "The Things Network RPi + IC880A Gateway Builder/Installer"
 echo ""
 
+# Make sure that we're able to do apt-get's quickly at runtime
+# to install necessary tools.  Tough to pay the price here,
+# but it's still better here than at device startup.
+apt-get update
+
 # Build in a temp folder that we'll completely  purge after build,
 # and install into the linux folder where apps reside.
 
