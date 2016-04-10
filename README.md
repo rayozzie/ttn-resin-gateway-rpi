@@ -3,6 +3,7 @@
 Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/) gateways based on the Raspberry Pi.
 
 It supports two configurations:
+
 1. A [LinkLabs Raspberry Pi "Hat"](http://link-labs.myshopify.com/products/lorawan-raspberry-pi-board)
 2. An [IMST iC880A-SPI](http://webshop.imst.de/ic880a-spi-lorawan-concentrator-868mhz.html) configured as described [here](https://github.com/ttn-zh/ic880a-gateway/tree/spi)
 
