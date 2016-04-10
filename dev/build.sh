@@ -6,10 +6,11 @@ set -e
 echo "The Things Network RPi + IC880A Gateway Builder/Installer"
 echo ""
 
-# Make sure that we're able to do apt-get's quickly at runtime
-# to install necessary tools.  Tough to pay the price here,
-# but it's still better here than at device startup.
+# Install the necessary packages, whether they're used
+# at build time or at runtime.
 apt-get update
+## needed by the "ip" command in set-gateway-id.sh called by run.sh 
+apt-get install iproute
 
 # Build in a temp folder that we'll completely  purge after build,
 # and install into the linux folder where apps reside.

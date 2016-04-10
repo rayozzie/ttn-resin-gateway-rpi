@@ -149,7 +149,6 @@ echo -e "{\n\
 # Set gateway_ID in local_conf.json to the gateway's MAC address
 
 echo "******************"
-apt-get install iproute
 ./set-gateway-id.sh start ./local_conf.json
 echo "******************"
 echo ""
