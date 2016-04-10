@@ -6,7 +6,7 @@ ENV INITSYSTEM on
 # Version number of gateway software.
 # (Incrementing this simply forces Docker to flush its cache
 #  and thus forces a full rebuild. Not used outside of Dockerfile.)
-ENV TTN_GATEWAY_SOFTWARE 48
+ENV TTN_GATEWAY_SOFTWARE 50
 
 # Copy the build and run environment
 COPY . /opt/ttn-gateway/

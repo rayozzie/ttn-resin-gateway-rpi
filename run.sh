@@ -9,7 +9,7 @@ fi
 
 # We need to be online, wait if needed.
 
-while [[ $(ping -c1 google.com 2>&1 | grep " 0% packet loss") == "" ]]; do
+until $(curl --output /dev/null --silent --head --fail http://www.google.com); do
   echo "[TTN Gateway]: Waiting for internet connection..."
   sleep 30
   done

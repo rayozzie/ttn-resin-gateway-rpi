@@ -1,4 +1,4 @@
-# TTN Gateway for Raspberry Pi + IMST iC880A SPI
+# TTN Gateway for Raspberry Pi
 
 Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/) gateways based on the iC880a concentrator with a Raspberry Pi host, connected using SPI.
 
