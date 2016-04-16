@@ -185,7 +185,7 @@ elif [[ $GW_TYPE == "linklabs-dev" ]]; then
 	gpio -1 write 29 1
 	sleep 0.1
 	gpio -1 write 29 0
-sleep 0.1
+	sleep 0.1
 else
 	echo "ERROR: unrecognized GW_TYPE=$GW_TYPE"
 	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
