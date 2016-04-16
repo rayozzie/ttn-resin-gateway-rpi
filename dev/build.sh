@@ -3,14 +3,8 @@
 # Stop on the first sign of trouble
 set -e
 
-echo "The Things Network RPi + IC880A Gateway Builder/Installer"
+echo "The Things Network Raspberry Pi Gateway Builder/Installer"
 echo ""
-
-# Install the necessary packages, whether they're used
-# at build time or at runtime.
-apt-get update
-## needed by the "ip" command in set-gateway-id.sh called by run.sh 
-apt-get install iproute
 
 # Build in a temp folder that we'll completely  purge after build,
 # and install into the linux folder where apps reside.
