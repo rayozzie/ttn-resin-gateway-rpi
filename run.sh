@@ -169,22 +169,22 @@ echo ""
 # Reset the board to a known state prior to launching the forwarder
 
 if [[ $GW_TYPE == "imst-ic880a-spi" ]]; then
-echo "Resetting IMST iC880A-SPI"
-gpio -1 mode 22 out
-gpio -1 write 22 0
-sleep 0.1
-gpio -1 write 22 1
-sleep 0.1
-gpio -1 write 22 0
-sleep 0.1
+	echo "Resetting IMST iC880A-SPI"
+	gpio -1 mode 22 out
+	gpio -1 write 22 0
+	sleep 0.1
+	gpio -1 write 22 1
+	sleep 0.1
+	gpio -1 write 22 0
+	sleep 0.1
 elif [[ $GW_TYPE == "linklabs-dev" ]]; then
-echo "Resetting LinkLabs Raspberry Pi Development Board""
-gpio -1 mode 29 out
-gpio -1 write 29 0
-sleep 0.1
-gpio -1 write 29 1
-sleep 0.1
-gpio -1 write 29 0
+	echo "Resetting LinkLabs Raspberry Pi Development Board"
+	gpio -1 mode 29 out
+	gpio -1 write 29 0
+	sleep 0.1
+	gpio -1 write 29 1
+	sleep 0.1
+	gpio -1 write 29 0
 sleep 0.1
 else
 	echo "ERROR: unrecognized GW_TYPE=$GW_TYPE"
