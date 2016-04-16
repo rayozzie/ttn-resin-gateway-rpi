@@ -177,7 +177,7 @@ gpio -1 write 22 1
 sleep 0.1
 gpio -1 write 22 0
 sleep 0.1
-if [[ $GW_TYPE == "linklabs-dev" ]]; then
+elif [[ $GW_TYPE == "linklabs-dev" ]]; then
 echo "Resetting LinkLabs Raspberry Pi Development Board""
 gpio -1 mode 29 out
 gpio -1 write 29 0
