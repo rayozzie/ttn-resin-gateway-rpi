@@ -2,10 +2,10 @@
 
 Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/) gateways based on the Raspberry Pi.
 
-It supports two configurations:
+It supports two configuration types, based on the gateway hardware you're attaching to your Raspberry Pi:
 
-1. A [LinkLabs Raspberry Pi "Hat"](http://link-labs.myshopify.com/products/lorawan-raspberry-pi-board)
-2. An [IMST iC880A-SPI](http://webshop.imst.de/ic880a-spi-lorawan-concentrator-868mhz.html) configured as described [here](https://github.com/ttn-zh/ic880a-gateway/tree/spi)
+1. "linklabs-dev", a [LinkLabs Raspberry Pi "Hat"](http://link-labs.myshopify.com/products/lorawan-raspberry-pi-board)
+2. "imst-ic880a-spi", an [IMST iC880A-SPI](http://webshop.imst.de/ic880a-spi-lorawan-concentrator-868mhz.html) configured as described [here](https://github.com/ttn-zh/ic880a-gateway/tree/spi)
 
 
 ## PREREQUISITES
@@ -24,12 +24,13 @@ It supports two configurations:
 
 ## PREPARING YOUR FIRST GATEWAY DEVICE FOR TTN
 
-Click the "Environment Variables" section at the left side of the screen. This will allow you to configure environment parameters for this and only this device, and which will be appropriately inserted into this device's "local_conf.json" with lowercase tuple names derived from the appropriate uppercase environment names beginning with "GW_".  For example, for an IMST gateway with no GPS, the MINIMUM environment variables that you should configure at this screen should look something like this.  For the LinkLabs gateway, which has a built-in GPS, you only need REGION, CONTACT_EMAIL, and DESCRIPTION.
+Click the "Environment Variables" section at the left side of the screen. This will allow you to configure environment parameters for this and only this device, and which will be appropriately inserted into this device's "local_conf.json" with lowercase tuple names derived from the appropriate uppercase environment names beginning with "GW_".  For example, for an IMST gateway with no GPS, the MINIMUM environment variables that you should configure at this screen should look something like this:
 
 DEVICE ENVIRONMENT VARIABLES  
 
 Name      	  	  | Value  
 ------------------|--------------------------  
+GW_TYPE           | imst-ic880a-spi
 GW_REGION         | EU
 GW_CONTACT_EMAIL  | yourname@yourdomain.com     
 GW_DESCRIPTION    | your-gateway-1  
@@ -37,6 +38,17 @@ GW_FAKE_GPS		  | true
 GW_REF_LATITUDE   | 52.376364       
 GW_REF_LONGITUDE  | 4.884232          
 GW_REF_ALTITUDE   | 3          
+
+On the other hand, for the LinkLabs gateway, which has a built-in GPS, you only need TYPE, REGION, CONTACT_EMAIL, and DESCRIPTION.
+
+DEVICE ENVIRONMENT VARIABLES  
+
+Name      	  	  | Value  
+------------------|--------------------------  
+GW_TYPE           | linklabs-dev
+GW_REGION         | EU
+GW_CONTACT_EMAIL  | yourname@yourdomain.com     
+GW_DESCRIPTION    | your-gateway-1  
 
 ## TRANSFERRING TTN GATEWAY SOFTWARE TO RESIN SO THAT IT MAY BE DOWNLOADED ON YOUR DEVICES
 

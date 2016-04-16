@@ -33,11 +33,19 @@ echo GW_REGION: $GW_REGION
 
 if [[ $GW_DESCRIPTION == "" ]]; then
     echo "ERROR: GW_DESCRIPTION required"
+	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
 	exit 1
 fi
 
 if [[ $GW_CONTACT_EMAIL == "" ]]; then
     echo "ERROR: GW_CONTACT_EMAIL required"
+	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
+	exit 1
+fi
+
+if [[ $GW_TYPE == "" ]]; then
+	echo "ERROR: GW_TYPE required"
+	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
 	exit 1
 fi
 
@@ -158,8 +166,10 @@ echo "******************"
 echo "******************"
 echo ""
 
-# Reset iC880a PIN - this is necessary to reset its state
+# Reset the board to a known state prior to launching the forwarder
 
+if [[ $GW_TYPE == "imst-ic880a-spi" ]]; then
+echo "Resetting IMST iC880A-SPI"
 gpio -1 mode 22 out
 gpio -1 write 22 0
 sleep 0.1
@@ -167,6 +177,20 @@ gpio -1 write 22 1
 sleep 0.1
 gpio -1 write 22 0
 sleep 0.1
+if [[ $GW_TYPE == "linklabs-dev" ]]; then
+echo "Resetting LinkLabs Raspberry Pi Development Board""
+gpio -1 mode 29 out
+gpio -1 write 29 0
+sleep 0.1
+gpio -1 write 29 1
+sleep 0.1
+gpio -1 write 29 0
+sleep 0.1
+else
+	echo "ERROR: unrecognized GW_TYPE=$GW_TYPE"
+	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
+	exit 1
+fi
 
 # Fire up the forwarder.  
 
