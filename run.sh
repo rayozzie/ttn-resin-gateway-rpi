@@ -1,23 +1,4 @@
 #! /bin/bash
-
-##### COMMENTS ABOUT LINKLABS HACKS still yet to be done
-##
-## Resin folks (Andrei, on 4/22) are working on some changes
-## that will ultimately enable TWO ways of dealing with RPI3:
-## 
-## Option #1: Leave RPi serial on /dev/ttyS0 and bluetooth on /dev/ttyAMA0
-##  This would require adding this Fleet Configuration variable, which
-##  fixes RPi3 serial port speed issues:
-##    RESIN_HOST_CONFIG_core_freq = 250
-##  This option also requires us to change the run.sh
-##  so that when GW_TYPE==linklabs-dev we default the
-##  serial port to /dev/ttyS0 rather than /dev/ttyAMA0
-##
-## Option #2: Disable bluetooth and put RPi serial back onto /dev/ttyAMA0
-##  This would require adding this Fleet Configuration variable:
-##    RESIN_HOST_CONFIG_dtoverlay=pi3-miniuart-bt
-##
-#####
  
 # Exit if we're debugging and haven't yet built the gateway.
 
@@ -33,9 +14,57 @@ fi
 
 # Show info about the machine we're running on
 
-echo *** Resin Machine Info:
-echo *** Type: $RESIN_MACHINE_NAME
-echo *** Architecture: $RESIN_ARCH
+echo "*** Resin Machine Info:"
+echo "*** Type: $RESIN_MACHINE_NAME"
+echo "*** Architecture: $RESIN_ARCH"
+
+##### Raspberry Pi 3 hacks necessary for LinkLabs boards
+##
+## Because of backward incompatibility between RPi2 and RPi3,
+## a hack is necessary to get serial working so that we can
+## access the GPS on the LinkLabs board.
+## 
+## Option #1: Leave RPi serial on /dev/ttyS0 and bluetooth on /dev/ttyAMA0
+##  This requires adding this Fleet Configuration variable, which
+##  fixes RPi3 serial port speed issues:
+##    RESIN_HOST_CONFIG_core_freq = 250
+##
+## Option #2: Disable bluetooth and put RPi serial back onto /dev/ttyAMA0
+##  This requires adding this Fleet Configuration variable, which
+##  swaps the bluetooth and serial uarts:
+##    RESIN_HOST_CONFIG_dtoverlay=pi3-miniuart-bt
+##
+#####
+
+if [[ $GW_TYPE == "" ]]; then
+	echo "ERROR: GW_TYPE required"
+	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
+	exit 1
+fi
+
+if [[ $GW_TYPE == "linklabs-dev" && "$RESIN_MACHINE_NAME" == "raspberrypi3" ]]
+then
+	echo "*** Raspberry Pi 3 with LinkLabs board"
+	if [[ "$RESIN_HOST_CONFIG_dtoverlay" == "pi3-miniuart-bt"]]
+	then
+		echo "*** Operating with Bluetooth disabled, and UART swapped onto /dev/ttyAMA0"
+		if [[ "$RESIN_HOST_CONFIG_core_freq" != "" ]]
+		then
+			echo "ERROR: Fleet configuration can only have EITHER dtoverlay OR core_freq, but not both."
+			exit 1
+		fi
+	elif [[ "$RESIN_HOST_CONFIG_core_freq" == "250" ]]
+		echo "*** Operating with Bluetooth enabled, and UART frequency adjusted to work properly
+    else
+		echo "*** Please add one of these two Resin Fleet Configuration variables (but not both)"
+        echo "*** If there is some reason you need Bluetooth (which is unlikely):"
+        echo "***     RESIN_HOST_CONFIG_dtoverlay=pi3-miniuart-bt"
+        echo "*** Otherwise:"
+        echo "***     RESIN_HOST_CONFIG_core_freq=250
+        exit 1
+	fi
+
+fi
 
 # We need to be online, wait if needed.
 
@@ -64,12 +93,6 @@ fi
 
 if [[ $GW_CONTACT_EMAIL == "" ]]; then
     echo "ERROR: GW_CONTACT_EMAIL required"
-	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
-	exit 1
-fi
-
-if [[ $GW_TYPE == "" ]]; then
-	echo "ERROR: GW_TYPE required"
 	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
 	exit 1
 fi
@@ -124,7 +147,16 @@ if [[ $GW_FORWARD_CRC_VALID == "" ]]; then GW_FORWARD_CRC_VALID="true"; fi
 if [[ $GW_FORWARD_CRC_ERROR == "" ]]; then GW_FORWARD_CRC_ERROR="false"; fi
 if [[ $GW_FORWARD_CRC_DISABLED == "" ]]; then GW_FORWARD_CRC_DISABLED="false"; fi
 
-if [[ $GW_GPS_TTY_PATH == "" ]]; then GW_GPS_TTY_PATH="/dev/ttyAMA0"; fi
+if [[ $GW_GPS_TTY_PATH == "" ]]
+then 
+	# Default to AMA0 unless this is an RPi3 with core frequency set in fleet config vars
+	GW_GPS_TTY_PATH="/dev/ttyAMA0"
+	if [[ "$RESIN_MACHINE_NAME" == "raspberrypi3" && "$RESIN_HOST_CONFIG_core_freq" != "" ]]
+	then
+		GW_GPS_TTY_PATH="/dev/ttyS0"
+	fi
+fi
+
 if [[ $GW_FAKE_GPS == "" ]]; then GW_FAKE_GPS="false"; fi
 
 if [[ $GW_GHOST_ADDRESS == "" ]]; then GW_GHOST_ADDRESS="127.0.0.1"; fi
