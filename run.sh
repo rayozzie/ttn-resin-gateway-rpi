@@ -1,5 +1,24 @@
 #! /bin/bash
 
+##### COMMENTS ABOUT LINKLABS HACKS still yet to be done
+##
+## Resin folks (Andrei, on 4/22) are working on some changes
+## that will ultimately enable TWO ways of dealing with RPI3:
+## 
+## Option #1: Leave RPi serial on /dev/ttyS0 and bluetooth on /dev/ttyAMA0
+##  This would require adding this Fleet Configuration variable, which
+##  fixes RPi3 serial port speed issues:
+##    RESIN_HOST_CONFIG_core_freq = 250
+##  This option also requires us to change the run.sh
+##  so that when GW_TYPE==linklabs-dev we default the
+##  serial port to /dev/ttyS0 rather than /dev/ttyAMA0
+##
+## Option #2: Disable bluetooth and put RPi serial back onto /dev/ttyAMA0
+##  This would require adding this Fleet Configuration variable:
+##    RESIN_HOST_CONFIG_dtoverlay=pi3-miniuart-bt
+##
+#####
+ 
 # Exit if we're debugging and haven't yet built the gateway.
 
 if [ ! -f  "ttn-gateway" ]; then
