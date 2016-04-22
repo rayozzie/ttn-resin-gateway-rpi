@@ -50,6 +50,20 @@ GW_REGION         | EU
 GW_CONTACT_EMAIL  | yourname@yourdomain.com     
 GW_DESCRIPTION    | your-gateway-1  
 
+SPECIAL Note for using the LinkLabs gateway on a Raspberry Pi 3:
+
+There is a backward incomatibility between the Raspberry Pi 1 and 2 hardware, and Raspberry Pi 3.  For Raspberry Pi 3, it is necessary to make a small additional configuration change.
+
+Click <- to go back to the Device List, and note that on the left there is an option called "Fleet Configuration".  Click it.
+
+Add a New config variable as follows:
+
+APPLICATION CONFIG VARIABLES  
+
+Name      	            	  | Value  
+------------------------------|--------------------------  
+RESIN_HOST_CONFIG_core_freq   | 250
+
 ## TRANSFERRING TTN GATEWAY SOFTWARE TO RESIN SO THAT IT MAY BE DOWNLOADED ON YOUR DEVICES
 
 1. On your Mac or PC, in terminal, change your working directory to the directory that is the clone of **this** git repo.

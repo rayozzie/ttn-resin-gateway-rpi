@@ -45,7 +45,7 @@ fi
 if [[ $GW_TYPE == "linklabs-dev" && "$RESIN_MACHINE_NAME" == "raspberrypi3" ]]
 then
 	echo "*** Raspberry Pi 3 with LinkLabs board"
-	if [[ "$RESIN_HOST_CONFIG_dtoverlay" == "pi3-miniuart-bt"]]
+	if [[ "$RESIN_HOST_CONFIG_dtoverlay" == "pi3-miniuart-bt" ]]
 	then
 		echo "*** Operating with Bluetooth disabled, and UART swapped onto /dev/ttyAMA0"
 		if [[ "$RESIN_HOST_CONFIG_core_freq" != "" ]]
@@ -54,13 +54,14 @@ then
 			exit 1
 		fi
 	elif [[ "$RESIN_HOST_CONFIG_core_freq" == "250" ]]
-		echo "*** Operating with Bluetooth enabled, and UART frequency adjusted to work properly
+	then
+   		echo "*** Operating with Bluetooth enabled, and UART frequency adjusted to work properly"
     else
 		echo "*** Please add one of these two Resin Fleet Configuration variables (but not both)"
         echo "*** If there is some reason you need Bluetooth (which is unlikely):"
         echo "***     RESIN_HOST_CONFIG_dtoverlay=pi3-miniuart-bt"
         echo "*** Otherwise:"
-        echo "***     RESIN_HOST_CONFIG_core_freq=250
+        echo "***     RESIN_HOST_CONFIG_core_freq=250"
         exit 1
 	fi
 
