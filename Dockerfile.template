@@ -4,10 +4,8 @@ FROM resin/%%RESIN_MACHINE_NAME%%-buildpack-deps
 ENV INITSYSTEM on
 
 # Make the hardware type available as a runtime env var
-run sh -c env
 ENV RESIN_ARCH %%RESIN_ARCH%%
-env RESIN_MACHINE_NAME %%RESIN_MACHINE_NAME%%
-run sh -c env
+ENV RESIN_MACHINE_NAME %%RESIN_MACHINE_NAME%%
 
 # Version number of gateway software.
 # (Incrementing this simply forces Docker to flush its cache
