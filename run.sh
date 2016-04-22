@@ -99,25 +99,25 @@ if [[ $GW_FORWARD_CRC_VALID == "" ]]; then GW_FORWARD_CRC_VALID="true"; fi
 if [[ $GW_FORWARD_CRC_ERROR == "" ]]; then GW_FORWARD_CRC_ERROR="false"; fi
 if [[ $GW_FORWARD_CRC_DISABLED == "" ]]; then GW_FORWARD_CRC_DISABLED="false"; fi
 
-if [[ $GW_GPS_TTY_PATH == "" ]]; then GW_GPS_TTY_PATH="\"/dev/ttyAMA0\""; fi
+if [[ $GW_GPS_TTY_PATH == "" ]]; then GW_GPS_TTY_PATH="/dev/ttyAMA0"; fi
 if [[ $GW_FAKE_GPS == "" ]]; then GW_FAKE_GPS="false"; fi
 
-if [[ $GW_GHOST_ADDRESS == "" ]]; then GW_GHOST_ADDRESS="\"127.0.0.1\""; fi
+if [[ $GW_GHOST_ADDRESS == "" ]]; then GW_GHOST_ADDRESS="127.0.0.1"; fi
 if [[ $GW_GHOST_PORT == "" ]]; then GW_GHOST_PORT="1918"; fi
 
-if [[ $GW_MONITOR_ADDRESS == "" ]]; then GW_MONITOR_ADDRESS="\"127.0.0.1\""; fi
+if [[ $GW_MONITOR_ADDRESS == "" ]]; then GW_MONITOR_ADDRESS="127.0.0.1"; fi
 if [[ $GW_MONITOR_PORT == "" ]]; then GW_MONITOR_PORT="2008"; fi
 
-if [[ $GW_SSH_PATH == "" ]]; then GW_SSH_PATH="\"/usr/bin/ssh\""; fi
+if [[ $GW_SSH_PATH == "" ]]; then GW_SSH_PATH="/usr/bin/ssh"; fi
 if [[ $GW_SSH_PORT == "" ]]; then GW_SSH_PORT="22"; fi
 
 if [[ $GW_HTTP_PORT == "" ]]; then GW_HTTP_PORT="80"; fi
 
-if [[ $GW_NGROK_PATH == "" ]]; then GW_NGROK_PATH="\"/usr/bin/ngrok\""; fi
+if [[ $GW_NGROK_PATH == "" ]]; then GW_NGROK_PATH="/usr/bin/ngrok"; fi
 
 if [[ $GW_SYSTEM_CALLS == "" ]]; then GW_SYSTEM_CALLS="[\"df -m\",\"free -h\",\"uptime\",\"who -a\",\"uname -a\"]"; fi
 
-if [[ $GW_PLATFORM == "" ]]; then GW_PLATFORM="\"*\""; fi
+if [[ $GW_PLATFORM == "" ]]; then GW_PLATFORM="*"; fi
 
 # Synthesize local.conf JSON from env vars
 
@@ -142,18 +142,18 @@ echo -e "{\n\
 \t\t\"forward_crc_valid\": $GW_FORWARD_CRC_VALID,\n\
 \t\t\"forward_crc_error\": $GW_FORWARD_CRC_ERROR,\n\
 \t\t\"forward_crc_disabled\": $GW_FORWARD_CRC_DISABLED,\n\
-\t\t\"gps_tty_path\": $GW_GPS_TTY_PATH,\n\
+\t\t\"gps_tty_path\": \"$GW_GPS_TTY_PATH\",\n\
 \t\t\"fake_gps\": $GW_FAKE_GPS,\n\
-\t\t\"ghost_address\": $GW_GHOST_ADDRESS,\n\
+\t\t\"ghost_address\": \"$GW_GHOST_ADDRESS\",\n\
 \t\t\"ghost_port\": $GW_GHOST_PORT,\n\
-\t\t\"monitor_address\": $GW_MONITOR_ADDRESS,\n\
+\t\t\"monitor_address\": \"$GW_MONITOR_ADDRESS\",\n\
 \t\t\"monitor_port\": $GW_MONITOR_PORT,\n\
-\t\t\"ssh_path\": $GW_SSH_PATH,\n\
+\t\t\"ssh_path\": \"$GW_SSH_PATH\",\n\
 \t\t\"ssh_port\": $GW_SSH_PORT,\n\
 \t\t\"http_port\": $GW_HTTP_PORT,\n\
-\t\t\"ngrok_path\": $GW_NGROK_PATH,\n\
+\t\t\"ngrok_path\": \"$GW_NGROK_PATH\",\n\
 \t\t\"system_calls\": $GW_SYSTEM_CALLS,\n\
-\t\t\"platform\": $GW_PLATFORM,\n\
+\t\t\"platform\": \"$GW_PLATFORM\",\n\
 \t\t\"ipinfo\": $IPINFO,\n\
 \t\t\"gateway_ID\": \"0000000000000000\"\n\
 \t}\n\
