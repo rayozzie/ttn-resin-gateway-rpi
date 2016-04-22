@@ -31,6 +31,12 @@ if [[ $GW_DEBUG != "" ]]; then
     exit 1
 fi
 
+# Show info about the machine we're running on
+
+echo *** Resin Machine Info:
+echo *** Type: $RESIN_MACHINE_NAME
+echo *** Architecture: $RESIN_ARCH
+
 # We need to be online, wait if needed.
 
 until $(curl --output /dev/null --silent --head --fail http://www.google.com); do
