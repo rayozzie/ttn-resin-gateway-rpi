@@ -4,7 +4,7 @@ FROM resin/raspberrypi-buildpack-deps
 ENV INITSYSTEM on
 
 # Make the hardware type available as a runtime env var
-ENV RESIN_ARCH %%RESIN_ARCH%%
+ENV RESIN_ARCHITECTURE $RESIN_ARCH
 
 # Version number of gateway software.
 # (Incrementing this simply forces Docker to flush its cache
