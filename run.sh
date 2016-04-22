@@ -16,7 +16,7 @@ fi
 
 echo "*** Resin Machine Info:"
 echo "*** Type: $RESIN_MACHINE_NAME"
-echo "*** Architecture: $RESIN_ARCH"
+echo "*** Arch: $RESIN_ARCH"
 
 ##### Raspberry Pi 3 hacks necessary for LinkLabs boards
 ##
