@@ -7,8 +7,8 @@ if [ ! -f  "ttn-gateway" ]; then
 	exit 1
 fi
 
-if [[ $GW_DEBUG != "" ]]; then
-    echo "*** GW_DEBUG asserted - exiting ***"
+if [[ $HALT != "" ]]; then
+    echo "*** HALT asserted - exiting ***"
     exit 1
 fi
 
