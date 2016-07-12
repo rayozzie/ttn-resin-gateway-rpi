@@ -1,6 +1,6 @@
 #! /bin/bash
  
-# Exit if we're debugging and haven't yet built the gateway.
+# Exit if we're debugging and haven't yet built the gateway
 
 if [ ! -f  "ttn-gateway" ]; then
 	echo "ERROR: gateway executable not yet built"
