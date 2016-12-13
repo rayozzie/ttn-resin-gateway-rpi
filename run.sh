@@ -1,4 +1,4 @@
-A#! /bin/bash
+#! /bin/bash
  
 # Exit if we're debugging and haven't yet built the gateway
 
