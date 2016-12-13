@@ -1,4 +1,4 @@
-#! /bin/bash
+A#! /bin/bash
  
 # Exit if we're debugging and haven't yet built the gateway
 
@@ -15,8 +15,10 @@ fi
 # Show info about the machine we're running on
 
 echo "*** Resin Machine Info:"
-echo "*** Type: $RESIN_MACHINE_NAME"
-echo "*** Arch: $RESIN_ARCH"
+echo "*** Type: '$RESIN_MACHINE_NAME'"
+echo "*** Arch: '$RESIN_ARCH'"
+echo "*** Cfg1: '$RESIN_HOST_CONFIG_dtoverlay'"
+echo "*** Cfg2: '$RESIN_HOST_CONFIG_core_freq'"
 
 ##### Raspberry Pi 3 hacks necessary for LinkLabs boards
 ##
