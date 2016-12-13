@@ -64,7 +64,8 @@ then
         echo "***     RESIN_HOST_CONFIG_dtoverlay=pi3-miniuart-bt"
         echo "*** Otherwise:"
         echo "***     RESIN_HOST_CONFIG_core_freq=250"
-        exit 1
+## regression? Resin OS 1.24.0 now no longer seems to expose fleet configuration vars
+##        exit 1
 	fi
 
 fi
