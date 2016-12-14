@@ -254,7 +254,7 @@ do
 
     echo "[TTN Gateway]: Starting packet forwarder..."
     ./ttn-gateway
-    echo "******************"
+    echo "****************** $CUSTOM_RESET_PIN"
     echo "*** [TTN Gateway]: EXIT (retrying in 15s)"
     echo "******************"
     sleep 15
