@@ -231,6 +231,14 @@ elif [[ $GW_TYPE == "risinghf" ]]; then
 	sleep 0.1
 	gpio -1 write 13 0
 	sleep 0.1
+elif [[ $GW_TYPE == "custom" ]]; then
+	gpio -1 mode $CUSTOM_RESET_PIN out
+	gpio -1 write $CUSTOM_RESET_PIN 0
+	sleep 0.1
+	gpio -1 write $CUSTOM_RESET_PIN 1
+	sleep 0.1
+	gpio -1 write $CUSTOM_RESET_PIN 0
+	sleep 0.1
 else
 	echo "ERROR: unrecognized GW_TYPE=$GW_TYPE"
 	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
