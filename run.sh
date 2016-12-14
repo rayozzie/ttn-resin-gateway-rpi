@@ -17,8 +17,6 @@ fi
 echo "*** Resin Machine Info:"
 echo "*** Type: '$RESIN_MACHINE_NAME'"
 echo "*** Arch: '$RESIN_ARCH'"
-echo "*** Cfg1: '$RESIN_HOST_CONFIG_dtoverlay'"
-echo "*** Cfg2: '$RESIN_HOST_CONFIG_core_freq'"
 
 ##### Raspberry Pi 3 hacks necessary for LinkLabs boards
 ##
@@ -42,32 +40,6 @@ if [[ $GW_TYPE == "" ]]; then
 	echo "ERROR: GW_TYPE required"
 	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
 	exit 1
-fi
-
-if [[ $GW_TYPE == "linklabs-dev" && "$RESIN_MACHINE_NAME" == "raspberrypi3" ]]
-then
-	echo "*** Raspberry Pi 3 with LinkLabs board"
-	if [[ "$RESIN_HOST_CONFIG_dtoverlay" == "pi3-miniuart-bt" ]]
-	then
-		echo "*** Operating with Bluetooth disabled, and UART swapped onto /dev/ttyAMA0"
-		if [[ "$RESIN_HOST_CONFIG_core_freq" != "" ]]
-		then
-			echo "ERROR: Fleet configuration can only have EITHER dtoverlay OR core_freq, but not both."
-			exit 1
-		fi
-	elif [[ "$RESIN_HOST_CONFIG_core_freq" == "250" ]]
-	then
-   		echo "*** Operating with Bluetooth enabled, and UART frequency adjusted to work properly"
-    else
-		echo "*** Please add one of these two Resin Fleet Configuration variables (but not both)"
-        echo "*** If there is some reason you need Bluetooth (which is unlikely):"
-        echo "***     RESIN_HOST_CONFIG_dtoverlay=pi3-miniuart-bt"
-        echo "*** Otherwise:"
-        echo "***     RESIN_HOST_CONFIG_core_freq=250"
-## regression? Resin OS 1.24.0 now no longer seems to expose fleet configuration vars
-##        exit 1
-	fi
-
 fi
 
 # We need to be online, wait if needed.
@@ -230,7 +202,7 @@ echo ""
 # Reset the board to a known state prior to launching the forwarder
 
 if [[ $GW_TYPE == "imst-ic880a-spi" ]]; then
-	echo "Resetting IMST iC880A-SPI"
+	echo "Toggling reset pin on IMST iC880A-SPI Board"
 	gpio -1 mode 22 out
 	gpio -1 write 22 0
 	sleep 0.1
@@ -239,13 +211,23 @@ if [[ $GW_TYPE == "imst-ic880a-spi" ]]; then
 	gpio -1 write 22 0
 	sleep 0.1
 elif [[ $GW_TYPE == "linklabs-dev" ]]; then
-	echo "Resetting LinkLabs Raspberry Pi Development Board"
+	echo "Toggling reset pin on LinkLabs Raspberry Pi Development Board"
 	gpio -1 mode 29 out
 	gpio -1 write 29 0
 	sleep 0.1
 	gpio -1 write 29 1
 	sleep 0.1
 	gpio -1 write 29 0
+	sleep 0.1
+elif [[ $GW_TYPE == "risinghf" ]]; then
+    ## found this info via gwrst.sh in the risinghf loriot concentrator install package
+	echo "Toggling reset pin on Rising HF Board"
+	gpio -1 mode 2 out
+	gpio -1 write 2 0
+	sleep 0.1
+	gpio -1 write 2 1
+	sleep 0.1
+	gpio -1 write 2 0
 	sleep 0.1
 else
 	echo "ERROR: unrecognized GW_TYPE=$GW_TYPE"
