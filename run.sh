@@ -1,10 +1,10 @@
 #! /bin/bash
- 
+
 # Exit if we're debugging and haven't yet built the gateway
 
 if [ ! -f  "ttn-gateway" ]; then
-	echo "ERROR: gateway executable not yet built"
-	exit 1
+    echo "ERROR: gateway executable not yet built"
+    exit 1
 fi
 
 if [[ $HALT != "" ]]; then
@@ -23,7 +23,7 @@ echo "*** Arch: '$RESIN_ARCH'"
 ## Because of backward incompatibility between RPi2 and RPi3,
 ## a hack is necessary to get serial working so that we can
 ## access the GPS on the LinkLabs board.
-## 
+##
 ## Option #1: Leave RPi serial on /dev/ttyS0 and bluetooth on /dev/ttyAMA0
 ##  This requires adding this Fleet Configuration variable, which
 ##  fixes RPi3 serial port speed issues:
@@ -37,17 +37,17 @@ echo "*** Arch: '$RESIN_ARCH'"
 #####
 
 if [[ $GW_TYPE == "" ]]; then
-	echo "ERROR: GW_TYPE required"
-	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
-	exit 1
+    echo "ERROR: GW_TYPE required"
+    echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
+    exit 1
 fi
 
 # We need to be online, wait if needed.
 
 until $(curl --output /dev/null --silent --head --fail http://www.google.com); do
-  echo "[TTN Gateway]: Waiting for internet connection..."
-  sleep 30
-  done
+    echo "[TTN Gateway]: Waiting for internet connection..."
+    sleep 30
+done
 
 # Ensure that we've got the required env vars
 
@@ -57,20 +57,20 @@ echo "*******************"
 
 if [[ $GW_REGION == "" ]]; then
     echo "ERROR: GW_REGION required"
-	exit 1
+    exit 1
 fi
 echo GW_REGION: $GW_REGION
 
 if [[ $GW_DESCRIPTION == "" ]]; then
     echo "ERROR: GW_DESCRIPTION required"
-	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
-	exit 1
+    echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
+    exit 1
 fi
 
 if [[ $GW_CONTACT_EMAIL == "" ]]; then
     echo "ERROR: GW_CONTACT_EMAIL required"
-	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
-	exit 1
+    echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
+    exit 1
 fi
 
 echo "******************"
@@ -80,11 +80,11 @@ echo ""
 
 if curl -sS --fail https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/$GW_REGION-global_conf.json --output ./global_conf.json
 then
-	echo Successfully loaded $GW_REGION-global_conf.json from TTN repo
+    echo Successfully loaded $GW_REGION-global_conf.json from TTN repo
 else
-	echo "******************"
+    echo "******************"
     echo "ERROR: GW_REGION not found"
-	echo "******************"
+    echo "******************"
     exit 1
 fi
 
@@ -92,12 +92,12 @@ fi
 
 if curl -sS --fail ipinfo.io --output ./ipinfo.json
 then
-	echo "Actual gateway location:"
-	IPINFO=$(cat ./ipinfo.json)
-	echo $IPINFO
+    echo "Actual gateway location:"
+    IPINFO=$(cat ./ipinfo.json)
+    echo $IPINFO
 else
-	echo "Unable to determine gateway location"
-	IPINFO="\"\""
+    echo "Unable to determine gateway location"
+    IPINFO="\"\""
 fi
 
 # Set up environmental defaults for local.conf
@@ -124,13 +124,13 @@ if [[ $GW_FORWARD_CRC_ERROR == "" ]]; then GW_FORWARD_CRC_ERROR="false"; fi
 if [[ $GW_FORWARD_CRC_DISABLED == "" ]]; then GW_FORWARD_CRC_DISABLED="false"; fi
 
 if [[ $GW_GPS_TTY_PATH == "" ]]
-then 
-	# Default to AMA0 unless this is an RPi3 with core frequency set in fleet config vars
-	GW_GPS_TTY_PATH="/dev/ttyAMA0"
-	if [[ "$RESIN_MACHINE_NAME" == "raspberrypi3" && "$RESIN_HOST_CONFIG_core_freq" != "" ]]
-	then
-		GW_GPS_TTY_PATH="/dev/ttyS0"
-	fi
+then
+    # Default to AMA0 unless this is an RPi3 with core frequency set in fleet config vars
+    GW_GPS_TTY_PATH="/dev/ttyAMA0"
+    if [[ "$RESIN_MACHINE_NAME" == "raspberrypi3" && "$RESIN_HOST_CONFIG_core_freq" != "" ]]
+    then
+        GW_GPS_TTY_PATH="/dev/ttyS0"
+    fi
 fi
 
 if [[ $GW_FAKE_GPS == "" ]]; then GW_FAKE_GPS="false"; fi
@@ -199,60 +199,64 @@ echo "******************"
 echo "******************"
 echo ""
 
-# Reset the board to a known state prior to launching the forwarder
 
-if [[ $GW_TYPE == "imst-ic880a-spi" ]]; then
-	echo "Toggling reset pin on IMST iC880A-SPI Board"
-	gpio -1 mode 22 out
-	gpio -1 write 22 0
-	sleep 0.1
-	gpio -1 write 22 1
-	sleep 0.1
-	gpio -1 write 22 0
-	sleep 0.1
-elif [[ $GW_TYPE == "linklabs-dev" ]]; then
-	echo "Toggling reset pin on LinkLabs Raspberry Pi Development Board"
-	gpio -1 mode 29 out
-	gpio -1 write 29 0
-	sleep 0.1
-	gpio -1 write 29 1
-	sleep 0.1
-	gpio -1 write 29 0
-	sleep 0.1
-elif [[ $GW_TYPE == "risinghf" ]]; then
-    ## found this info via gwrst.sh in the risinghf loriot concentrator install package
-    ## that info toggled pin 2, which I must assume to be Wiring's GPIO02 and thus
-    ## pin BCM27/RPI13 on Raspberry Pi. It couldn't be RPi pin 2 because that's 5VDC.
-	echo "Toggling reset pin on Rising HF Board"
-	gpio -1 mode 13 out
-	gpio -1 write 13 0
-	sleep 0.1
-	gpio -1 write 13 1
-	sleep 0.1
-	gpio -1 write 13 0
-	sleep 0.1
-elif [[ $GW_TYPE == "custom" ]]; then
-	gpio -1 mode $CUSTOM_RESET_PIN out
-	gpio -1 write $CUSTOM_RESET_PIN 0
-	sleep 0.1
-	gpio -1 write $CUSTOM_RESET_PIN 1
-	sleep 0.1
-	gpio -1 write $CUSTOM_RESET_PIN 0
-	sleep 0.1
-else
-	echo "ERROR: unrecognized GW_TYPE=$GW_TYPE"
-	echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
-	exit 1
-fi
-
-# Fire up the forwarder.  
+# Fire up the forwarder.
 
 while true
-  do
+do
+
+    # Reset the board to a known state prior to launching the forwarder
+
+    if [[ $GW_TYPE == "imst-ic880a-spi" ]]; then
+        echo "[TTN Gateway]: Toggling reset pin on IMST iC880A-SPI Board"
+        gpio -1 mode 22 out
+        gpio -1 write 22 0
+        sleep 0.1
+        gpio -1 write 22 1
+        sleep 0.1
+        gpio -1 write 22 0
+        sleep 0.1
+    elif [[ $GW_TYPE == "linklabs-dev" ]]; then
+        echo "[TTN Gateway]: Toggling reset pin on LinkLabs Raspberry Pi Development Board"
+        gpio -1 mode 29 out
+        gpio -1 write 29 0
+        sleep 0.1
+        gpio -1 write 29 1
+        sleep 0.1
+        gpio -1 write 29 0
+        sleep 0.1
+    elif [[ $GW_TYPE == "risinghf" ]]; then
+        ## found this info via gwrst.sh in the risinghf loriot concentrator install package
+        ## that info toggled pin 2, which I must assume to be Wiring's GPIO02 and thus
+        ## pin BCM27/RPI13 on Raspberry Pi. It couldn't be RPi pin 2 because that's 5VDC.
+        echo "[TTN Gateway]: Toggling reset pin on Rising HF Board"
+        gpio -1 mode 13 out
+        gpio -1 write 13 0
+        sleep 0.1
+        gpio -1 write 13 1
+        sleep 0.1
+        gpio -1 write 13 0
+        sleep 0.1
+    elif [[ $GW_TYPE == "custom" ]]; then
+        echo "[TTN Gateway]: Toggling custom reset pin $CUSTOM_RESET_PIN"
+        gpio -1 mode $CUSTOM_RESET_PIN out
+        gpio -1 write $CUSTOM_RESET_PIN 0
+        sleep 0.1
+        gpio -1 write $CUSTOM_RESET_PIN 1
+        sleep 0.1
+        gpio -1 write $CUSTOM_RESET_PIN 0
+        sleep 0.1
+    else
+        echo "ERROR: unrecognized GW_TYPE=$GW_TYPE"
+        echo "See https://github.com/rayozzie/ttn-resin-gateway-rpi/blob/master/README.md"
+        exit 1
+    fi
+
     echo "[TTN Gateway]: Starting packet forwarder..."
     ./ttn-gateway
-	echo "******************"
+    echo "******************"
     echo "*** [TTN Gateway]: EXIT (retrying in 15s)"
-	echo "******************"
+    echo "******************"
     sleep 15
-  done
+
+done
