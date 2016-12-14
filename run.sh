@@ -221,13 +221,15 @@ elif [[ $GW_TYPE == "linklabs-dev" ]]; then
 	sleep 0.1
 elif [[ $GW_TYPE == "risinghf" ]]; then
     ## found this info via gwrst.sh in the risinghf loriot concentrator install package
+    ## that info toggled pin 2, which I must assume to be Wiring's GPIO02 and thus
+    ## pin 3 on Raspberry Pi. It couldn't be RPi pin 2 because that's 5VDC.
 	echo "Toggling reset pin on Rising HF Board"
-	gpio -1 mode 2 out
-	gpio -1 write 2 0
+	gpio -1 mode 3 out
+	gpio -1 write 3 0
 	sleep 0.1
-	gpio -1 write 2 1
+	gpio -1 write 3 1
 	sleep 0.1
-	gpio -1 write 2 0
+	gpio -1 write 3 0
 	sleep 0.1
 else
 	echo "ERROR: unrecognized GW_TYPE=$GW_TYPE"
