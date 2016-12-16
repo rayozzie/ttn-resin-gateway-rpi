@@ -230,12 +230,12 @@ do
         ## that info toggled pin 2, which I must assume to be Wiring's GPIO02 and thus
         ## pin BCM27/RPI13 on Raspberry Pi. It couldn't be RPi pin 2 because that's 5VDC.
         echo "[TTN Gateway]: Toggling reset pin on Rising HF Board"
-        gpio -1 mode 13 out
-        gpio -1 write 13 0
+        gpio -1 mode 26 out
+        gpio -1 write 26 0
         sleep 0.1
-        gpio -1 write 13 1
+        gpio -1 write 26 1
         sleep 0.1
-        gpio -1 write 13 0
+        gpio -1 write 26 0
         sleep 0.1
     elif [[ $GW_TYPE == "custom" ]]; then
         echo "[TTN Gateway]: Toggling custom reset pin $CUSTOM_RESET_PIN"
