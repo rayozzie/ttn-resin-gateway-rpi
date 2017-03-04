@@ -123,6 +123,8 @@ if [[ $GW_FORWARD_CRC_VALID == "" ]]; then GW_FORWARD_CRC_VALID="true"; fi
 if [[ $GW_FORWARD_CRC_ERROR == "" ]]; then GW_FORWARD_CRC_ERROR="false"; fi
 if [[ $GW_FORWARD_CRC_DISABLED == "" ]]; then GW_FORWARD_CRC_DISABLED="false"; fi
 
+if [[ $GW_SERVER_ADDRESS == "" ]]; then GWSA="no_server_address"; else GWSA="server_address"; fi
+
 if [[ $GW_GPS_TTY_PATH == "" ]]
 then
     # Default to AMA0 unless this is an RPi3 with core frequency set in fleet config vars
@@ -180,6 +182,7 @@ echo -e "{\n\
 \t\t\"ghost_address\": \"$GW_GHOST_ADDRESS\",\n\
 \t\t\"ghost_port\": $GW_GHOST_PORT,\n\
 \t\t\"monitor_address\": \"$GW_MONITOR_ADDRESS\",\n\
+\t\t\"$GWSA\": \"$GW_SERVER_ADDRESS\",\n\
 \t\t\"monitor_port\": $GW_MONITOR_PORT,\n\
 \t\t\"ssh_path\": \"$GW_SSH_PATH\",\n\
 \t\t\"ssh_port\": $GW_SSH_PORT,\n\
@@ -226,9 +229,6 @@ do
         gpio -1 write 29 0
         sleep 0.1
     elif [[ $GW_TYPE == "risinghf" ]]; then
-        ## found this info via gwrst.sh in the risinghf loriot concentrator install package
-        ## that info toggled pin 2, which I must assume to be Wiring's GPIO02 and thus
-        ## pin BCM27/RPI13 on Raspberry Pi. It couldn't be RPi pin 2 because that's 5VDC.
         echo "[TTN Gateway]: Toggling reset pin on Rising HF Board"
         gpio -1 mode 26 out
         gpio -1 write 26 0
