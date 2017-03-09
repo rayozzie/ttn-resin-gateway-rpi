@@ -74,7 +74,9 @@ RESIN_HOST_CONFIG_core_freq   | 250
 3. Type the following commands into terminal to "push" the TTN files up to resin.io:
 
    git add .
+
    git -m "first upload of ttn files to resin"
+
    git push resin master
 
 5. What you'll now see happening in terminal is that this "git push" does an incredible amount of work:
