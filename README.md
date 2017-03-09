@@ -69,15 +69,13 @@ RESIN_HOST_CONFIG_core_freq   | 250
 1. On your Mac or PC, in terminal, change your working directory to the directory that is the clone of **this** git repo.
 2. Now, type the command that you'll see displayed in the edit control in the upper-right corner of the Resin devices dashboard for your device. This command "connects" your local directory to the resin GIT service, which uses GIT to "receive" the gateway software from TTN, and it looks something like this:
 
-   git remote add resin youraccount@git.resin.io:youraccount/yourapplication.git
+   git remote add resin youraccount@git.resin.io:youraccount/yourapplication.git  
 
 3. Type the following commands into terminal to "push" the TTN files up to resin.io:
 
-   git add .
-
-   git -m "first upload of ttn files to resin"
-
-   git push resin master
+   git add .  
+   git -m "first upload of ttn files to resin"  
+   git push resin master  
 
 5. What you'll now see happening in terminal is that this "git push" does an incredible amount of work:
 
@@ -96,10 +94,10 @@ RESIN_HOST_CONFIG_core_freq   | 250
 
 - If you'd like to update the software across all the gateways in your device fleet, simply do the following:
 
-  Edit the Dockerfile to bump the TTN_GATEWAY_VERSION number
-  git add .
-  git commit -m "Updated gateway version"
-  git push resin master"
+  Edit the Dockerfile to bump the TTN_GATEWAY_VERSION number  
+  git add .  
+  git commit -m "Updated gateway version"  
+  git push resin master"  
 
 # Credits
 
