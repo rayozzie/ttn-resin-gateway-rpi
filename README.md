@@ -1,6 +1,6 @@
 # TTN Gateway for Raspberry Pi
 
-Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/) gateways based on the Raspberry Pi.
+Resin Dockerfile & scripts for [The Things Network](http://thethingsnetwork.org/) gateways based on the Raspberry Pi. 
 
 It supports two configuration types, based on the gateway hardware you're attaching to your Raspberry Pi:
 
